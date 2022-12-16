@@ -4,11 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 public class SecurityConstants {
 
 	// FIXME : Customize security constants for your application.
@@ -44,7 +40,7 @@ public class SecurityConstants {
 
 	public static final String LOGIN_REQUEST_URI = "/login";
 
-	public static final String REGISTRATION_REQUEST_URI = "/register";
+	public static final String REGISTRATION_REQUEST_URI = "/register/user";
 
 	private SecurityConstants() {
 

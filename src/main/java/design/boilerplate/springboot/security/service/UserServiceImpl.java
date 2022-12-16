@@ -14,11 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -45,10 +41,9 @@ public class UserServiceImpl implements UserService {
 
 		userValidationService.validateUser(registrationRequest);
 
-		final User user = UserMapper.INSTANCE.convertToUser(registrationRequest);
+		final User user = UserMapper.INSTANCE.map(registrationRequest);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setUserRole(UserRole.USER);
-
 		userRepository.save(user);
 
 		final String username = registrationRequest.getUsername();

@@ -8,11 +8,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import static design.boilerplate.springboot.utils.ProjectConstants.DEFAULT_ENCODING;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 @Configuration
 public class MessageConfiguration {
 

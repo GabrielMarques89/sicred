@@ -8,11 +8,7 @@ import lombok.ToString;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 @Getter
 @Setter
 @ToString
@@ -28,6 +24,9 @@ public class RegistrationRequest {
 
 	@NotEmpty(message = "{registration_username_not_empty}")
 	private String username;
+
+	@NotEmpty(message = "{registration_username_not_empty}")
+	private String cpf;
 
 	@NotEmpty(message = "{registration_password_not_empty}")
 	private String password;

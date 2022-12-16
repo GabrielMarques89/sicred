@@ -21,11 +21,7 @@ import java.util.Objects;
 
 import static design.boilerplate.springboot.security.utils.SecurityConstants.*;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 @Slf4j
 @Service
 @RequiredArgsConstructor

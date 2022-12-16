@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor

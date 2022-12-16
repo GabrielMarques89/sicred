@@ -1,6 +1,6 @@
 package design.boilerplate.springboot.security.dto;
 
-import design.boilerplate.springboot.model.UserRole;
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,14 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AuthenticatedUserDto {
+public class TopicRequest {
 
+	@NotEmpty(message = "{login_username_not_empty}")
 	private String name;
-
-	private String username;
-
-	private String password;
-
-	private UserRole userRole;
-
 }

@@ -8,58 +8,63 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserValidationService {
 
-	private static final String EMAIL_ALREADY_EXISTS = "email_already_exists";
+  private static final String EMAIL_ALREADY_EXISTS = "email_already_exists";
+  private static final String CPF_ALREADY_EXISTS = "cpf_already_exists";
 
-	private static final String USERNAME_ALREADY_EXISTS = "username_already_exists";
+  private static final String USERNAME_ALREADY_EXISTS = "username_already_exists";
 
-	private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-	private final ExceptionMessageAccessor exceptionMessageAccessor;
+  private final ExceptionMessageAccessor exceptionMessageAccessor;
 
-	public void validateUser(RegistrationRequest registrationRequest) {
+  public void validateUser(RegistrationRequest registrationRequest) {
+    checkEmail(registrationRequest.getEmail());
+    checkCpf(registrationRequest.getCpf());
+    checkUsername(registrationRequest.getUsername());
+  }
 
-		final String email = registrationRequest.getEmail();
-		final String username = registrationRequest.getUsername();
+  private void checkUsername(String username) {
 
-		checkEmail(email);
-		checkUsername(username);
-	}
+    final boolean existsByUsername = userRepository.existsByUsername(username);
 
-	private void checkUsername(String username) {
+    if (existsByUsername) {
+      log.warn("{} is already being used!", username);
 
-		final boolean existsByUsername = userRepository.existsByUsername(username);
+      final String existsUsername = exceptionMessageAccessor.getMessage(null,
+          USERNAME_ALREADY_EXISTS);
+      throw new RegistrationException(existsUsername);
+    }
+  }
 
-		if (existsByUsername) {
+  private void checkCpf(String cpf) {
+    final boolean existsByCpf = userRepository.existsByCpf(cpf);
 
-			log.warn("{} is already being used!", username);
+    if (existsByCpf) {
 
-			final String existsUsername = exceptionMessageAccessor.getMessage(null, USERNAME_ALREADY_EXISTS);
-			throw new RegistrationException(existsUsername);
-		}
+      log.warn("{} is already being used!", cpf);
 
-	}
+      final String existsEmail = exceptionMessageAccessor.getMessage(null, CPF_ALREADY_EXISTS);
+      throw new RegistrationException(existsEmail);
+    }
+  }
 
-	private void checkEmail(String email) {
+  private void checkEmail(String email) {
 
-		final boolean existsByEmail = userRepository.existsByEmail(email);
+    final boolean existsByEmail = userRepository.existsByEmail(email);
 
-		if (existsByEmail) {
+    if (existsByEmail) {
 
-			log.warn("{} is already being used!", email);
+      log.warn("{} is already being used!", email);
 
-			final String existsEmail = exceptionMessageAccessor.getMessage(null, EMAIL_ALREADY_EXISTS);
-			throw new RegistrationException(existsEmail);
-		}
-	}
+      final String existsEmail = exceptionMessageAccessor.getMessage(null, EMAIL_ALREADY_EXISTS);
+      throw new RegistrationException(existsEmail);
+    }
+  }
 
 }

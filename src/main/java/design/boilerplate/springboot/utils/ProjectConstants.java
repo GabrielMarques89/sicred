@@ -2,11 +2,7 @@ package design.boilerplate.springboot.utils;
 
 import java.util.Locale;
 
-/**
- * Created on Ağustos, 2020
- *
- * @author Faruk
- */
+
 public final class ProjectConstants {
 
 	// FIXME : Customize project constants for your application.
@@ -16,6 +12,7 @@ public final class ProjectConstants {
 	public static final String PROJECT_BASE_PACKAGE = "design.boilerplate.springboot";
 
 	public static final Locale TURKISH_LOCALE = new Locale.Builder().setLanguage("tr").setRegion("TR").build();
+	public static final Locale DEFAULT_LOCALE = new Locale.Builder().setLanguage("en").setRegion("EN").build();
 
 	private ProjectConstants() {
 
