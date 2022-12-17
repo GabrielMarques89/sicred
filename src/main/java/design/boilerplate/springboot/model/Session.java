@@ -3,8 +3,6 @@ package design.boilerplate.springboot.model;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -38,9 +36,6 @@ public class Session {
 
   @Column(nullable = true)
   private LocalDateTime endDateTime;
-
-  @Column(nullable = true)
-  private int duration;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "topic_id", nullable = false, foreignKey = @ForeignKey(name = "FK_SESSION_TOPIC"))

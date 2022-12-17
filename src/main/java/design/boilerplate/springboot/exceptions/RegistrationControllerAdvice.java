@@ -1,15 +1,15 @@
 package design.boilerplate.springboot.exceptions;
 
-import design.boilerplate.springboot.controller.RegistrationController;
+import design.boilerplate.springboot.controller.UserController;
+import design.boilerplate.springboot.exceptions.response.ApiExceptionResponse;
+import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.LocalDateTime;
 
-
-@RestControllerAdvice(basePackageClasses = RegistrationController.class)
+@RestControllerAdvice(basePackageClasses = UserController.class)
 public class RegistrationControllerAdvice {
 
 	@ExceptionHandler(RegistrationException.class)

@@ -1,12 +1,12 @@
 package design.boilerplate.springboot.configuration;
 
+import static design.boilerplate.springboot.utils.ProjectConstants.DEFAULT_ENCODING;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-
-import static design.boilerplate.springboot.utils.ProjectConstants.DEFAULT_ENCODING;
 
 
 @Configuration

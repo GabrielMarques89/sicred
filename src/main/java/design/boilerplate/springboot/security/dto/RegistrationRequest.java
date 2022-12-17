@@ -1,12 +1,11 @@
 package design.boilerplate.springboot.security.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
 
 @Getter

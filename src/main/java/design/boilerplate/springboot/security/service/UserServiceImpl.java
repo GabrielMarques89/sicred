@@ -9,6 +9,7 @@ import design.boilerplate.springboot.security.dto.RegistrationResponse;
 import design.boilerplate.springboot.security.mapper.UserMapper;
 import design.boilerplate.springboot.service.UserValidationService;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
+import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,6 +38,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public Long countUsers(){
+		return userRepository.count();
+	}
+
+	@Override
+	public RegistrationResponse registrationV2(RegistrationRequest registrationRequest)
+			throws NotImplementedException {
+		//TODO: Implementar lógica adicional
+		throw new NotImplementedException("Yet to implement");
+	}
+
+
 	public RegistrationResponse registration(RegistrationRequest registrationRequest) {
 
 		userValidationService.validateUser(registrationRequest);

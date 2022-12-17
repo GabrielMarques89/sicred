@@ -1,10 +1,22 @@
 package design.boilerplate.springboot.repository;
 
 import design.boilerplate.springboot.model.Session;
-import design.boilerplate.springboot.model.User;
+import design.boilerplate.springboot.model.Topic;
+import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface SessionRepository extends JpaRepository<Session, Long> {
+
+  List<Session> findByEndDateTimeOrderByBeginDateTimeAsc(LocalDateTime endDateTime,
+      Pageable pageable);
+
+  List<Session> findByTopic(Topic topic);
+
+  boolean existsByTopic(Topic topic);
+
+
 
 }

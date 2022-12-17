@@ -14,5 +14,5 @@ public interface SessionMapper {
 	SessionMapper INSTANCE = Mappers.getMapper(SessionMapper.class);
 
 	@Mapping(target = "topic.id", source = "topic")
-	Session map(SessionRequest sessionRequest);
+	Session convert(SessionRequest sessionRequest);
 }

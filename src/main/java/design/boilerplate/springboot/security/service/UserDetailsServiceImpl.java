@@ -2,6 +2,8 @@ package design.boilerplate.springboot.security.service;
 
 import design.boilerplate.springboot.model.UserRole;
 import design.boilerplate.springboot.security.dto.AuthenticatedUserDto;
+import java.util.Collections;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,9 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.Objects;
 
 
 @Slf4j

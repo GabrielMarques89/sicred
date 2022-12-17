@@ -1,5 +1,6 @@
 package design.boilerplate.springboot.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,17 +30,18 @@ public class Vote {
 	private Long id;
 
 	@OneToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
 	@OneToOne
-	@JoinColumn(name = "session_id")
+	@JoinColumn(name = "session_id", nullable = false)
 	private Session session;
 
 
 	@ManyToOne
-	@JoinColumn(name = "topic_id")
+	@JoinColumn(name = "topic_id", nullable = false)
 	private Topic topic;
 
+	@Column(nullable = false)
 	private VoteResult voteResult;
 }

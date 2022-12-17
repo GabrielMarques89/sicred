@@ -6,10 +6,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import design.boilerplate.springboot.model.User;
 import design.boilerplate.springboot.model.UserRole;
+import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 
 @Component
