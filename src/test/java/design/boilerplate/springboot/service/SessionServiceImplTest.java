@@ -2,11 +2,12 @@ package design.boilerplate.springboot.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static util.DtoHelper.mockRequest;
+import static util.DtoHelper.mockSessionRequest;
 import static util.DtoHelper.mockSessionOpenningRequest;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
@@ -15,13 +16,14 @@ import design.boilerplate.springboot.repository.SessionRepository;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
-import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import util.BaseSicredServiceTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import util.BaseSicredTest;
 import util.ModelHelper;
 
-public class SessionServiceImplTest extends BaseSicredServiceTest {
+public class SessionServiceImplTest extends BaseSicredTest {
 
   @InjectMocks
   private SessionServiceImpl service;
@@ -39,18 +41,22 @@ public class SessionServiceImplTest extends BaseSicredServiceTest {
 
   @Test
   public void testCreateSessionSuccess() {
-    var req = mockRequest();
+    var req = mockSessionRequest();
     service.createSession(req);
   }
 
-  @Test(expected = RegistrationException.class)
+  @BeforeMethod()
+  public void resetCount(){
+    clearInvocations(sessionRepository);
+  }
+
+  @Test(expectedExceptions = RegistrationException.class)
   public void testCreateSessionValidationFail() {
     doThrow(RegistrationException.class).when(sessionValidationService).validateSession(any());
-    var req = mockRequest();
+    var req = mockSessionRequest();
     service.createSession(req);
 
     verify(sessionRepository, times(0)).save(any());
-    verify(sessionRepository, times(1)).existsByTopic(any());
   }
 
   @Test()
@@ -63,7 +69,7 @@ public class SessionServiceImplTest extends BaseSicredServiceTest {
     verify(sessionRepository, times(1)).findById(any());
   }
 
-  @Test(expected = RuntimeException.class)
+  @Test(expectedExceptions = RuntimeException.class)
   public void testGetSessionFail() {
     mockFindSessionOnRepo(java.util.Optional.empty());
 

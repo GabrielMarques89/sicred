@@ -35,19 +35,17 @@ logging:
     org.springframework: INFO
     design.boilerplate.springboot: INFO
 
-## FIXME : Customize JWT token and Swagger information for your application
-
 jwt:
-  secretKey: secret
-  issuer: www.farukgenc.com
+  secretKey: 2UtUnoOMjwNiTmeT2dLXNexH4vjAIyqTquvGCLdoEUcNY0F89P
+  issuer: https://www.linkedin.com/in/gabriel-marques1989/
   expirationMinute: 10
 
 swagger:
-  contact-name: Faruk Genc
-  contact-mail: omer@farukgenc.com
-  contact-url: https://farukgenc.com
-  app-name: Spring Boot Boilerplate Project
-  app-description: "Spring Boot Boilerplate is a starter kit. This project includes : Spring Boot(2.7.4), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger"
+  contact-name: Gabriel Marques
+  contact-mail: marques.gabriel.1989@gmail.com
+  contact-url: https://www.linkedin.com/in/gabriel-marques1989/
+  app-name: Spring Boot - Sicred Project
+  app-description: "Projeto para entrega de teste técnico - Sidcred - Por Gabriel Marques"
   app-version: 2.0.0
   app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
   app-license: Apache 2.0

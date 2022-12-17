@@ -6,13 +6,13 @@ import static org.mockito.Mockito.when;
 import design.boilerplate.springboot.exceptions.RegistrationException;
 import design.boilerplate.springboot.repository.SessionRepository;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
-import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import util.BaseSicredServiceTest;
+import org.testng.annotations.Test;
+import util.BaseSicredTest;
 import util.ModelHelper;
 
-public class SessionValidationServiceTest extends BaseSicredServiceTest {
+public class SessionValidationServiceTest extends BaseSicredTest {
   @Mock
   private SessionRepository sessionRepository;
   @InjectMocks
@@ -24,7 +24,7 @@ public class SessionValidationServiceTest extends BaseSicredServiceTest {
   @Mock
   private ExceptionMessageAccessor exceptionMessageAccessor;
 
-  @Test(expected = RegistrationException.class)
+  @Test(expectedExceptions = RegistrationException.class)
   public void testCreateSessionValidationFail() {
     var session = ModelHelper.mockSession();
     when(sessionRepository.existsByTopic(any())).thenReturn(true);
@@ -32,7 +32,7 @@ public class SessionValidationServiceTest extends BaseSicredServiceTest {
     sessionValidationService.validateSession(session);
   }
 
-  @Test(expected = RegistrationException.class)
+  @Test(expectedExceptions = RegistrationException.class)
   public void testCreateSessionValidationNoTopic() {
     var session = ModelHelper.mockSession();
     when(sessionRepository.existsByTopic(any())).thenReturn(false);
