@@ -1,8 +1,8 @@
 package design.boilerplate.springboot.controller;
 
-import design.boilerplate.springboot.security.dto.RegistrationRequest;
-import design.boilerplate.springboot.security.dto.RegistrationResponse;
-import design.boilerplate.springboot.security.service.UserService;
+import design.boilerplate.springboot.model.dto.RegistrationRequest;
+import design.boilerplate.springboot.model.dto.RegistrationResponse;
+import design.boilerplate.springboot.service.UserService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

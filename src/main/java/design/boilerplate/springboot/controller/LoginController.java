@@ -1,7 +1,7 @@
 package design.boilerplate.springboot.controller;
 
-import design.boilerplate.springboot.security.dto.LoginRequest;
-import design.boilerplate.springboot.security.dto.LoginResponse;
+import design.boilerplate.springboot.model.dto.LoginRequest;
+import design.boilerplate.springboot.model.dto.LoginResponse;
 import design.boilerplate.springboot.security.jwt.JwtTokenService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;

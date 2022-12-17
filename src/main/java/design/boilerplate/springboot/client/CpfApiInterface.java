@@ -1,6 +1,6 @@
 package design.boilerplate.springboot.client;
 
-import design.boilerplate.springboot.security.dto.CpfResponse;
+import design.boilerplate.springboot.model.dto.CpfResponse;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;

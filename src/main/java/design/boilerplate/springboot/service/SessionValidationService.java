@@ -3,7 +3,6 @@ package design.boilerplate.springboot.service;
 import design.boilerplate.springboot.exceptions.RegistrationException;
 import design.boilerplate.springboot.model.Session;
 import design.boilerplate.springboot.repository.SessionRepository;
-import design.boilerplate.springboot.security.service.TopicService;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

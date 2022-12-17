@@ -3,7 +3,7 @@ package design.boilerplate.springboot.service;
 import design.boilerplate.springboot.client.CpfApiInterface;
 import design.boilerplate.springboot.exceptions.RegistrationException;
 import design.boilerplate.springboot.repository.UserRepository;
-import design.boilerplate.springboot.security.dto.RegistrationRequest;
+import design.boilerplate.springboot.model.dto.RegistrationRequest;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import feign.Feign;
 import feign.gson.GsonDecoder;

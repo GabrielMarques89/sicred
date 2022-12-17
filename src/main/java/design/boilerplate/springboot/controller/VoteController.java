@@ -1,10 +1,10 @@
 package design.boilerplate.springboot.controller;
 
-import design.boilerplate.springboot.security.dto.RegistrationResponse;
-import design.boilerplate.springboot.security.dto.VoteCountDto;
-import design.boilerplate.springboot.security.dto.VoteRequest;
-import design.boilerplate.springboot.security.service.UserService;
-import design.boilerplate.springboot.security.service.VoteService;
+import design.boilerplate.springboot.model.dto.RegistrationResponse;
+import design.boilerplate.springboot.model.dto.VoteCountDto;
+import design.boilerplate.springboot.model.dto.VoteRequest;
+import design.boilerplate.springboot.service.UserService;
+import design.boilerplate.springboot.service.VoteService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
