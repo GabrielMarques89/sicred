@@ -1,19 +1,19 @@
 package design.boilerplate.springboot.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static util.DtoHelper.mockSessionRequest;
+import static org.testng.Assert.assertEquals;
 import static util.DtoHelper.mockSessionOpenningRequest;
+import static util.DtoHelper.mockSessionRequest;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
 import design.boilerplate.springboot.model.Session;
 import design.boilerplate.springboot.repository.SessionRepository;
-import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
+import design.boilerplate.springboot.utils.GeneralMessageAccessor;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import org.mockito.InjectMocks;
@@ -21,29 +21,34 @@ import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import util.BaseSicredTest;
+import util.DtoHelper;
 import util.ModelHelper;
 
 public class SessionServiceImplTest extends BaseSicredTest {
 
   @InjectMocks
   private SessionServiceImpl service;
-
   @Mock
   private SessionRepository sessionRepository;
   @Mock
   private SessionValidationService sessionValidationService;
-
   @Mock
-  private ExceptionMessageAccessor exceptionMessageAccessor;
-
-  @Mock
-  private VoteService voteService;
+  private GeneralMessageAccessor generalMessageAccessor;
 
   @Test
   public void testCreateSessionSuccess() {
     var req = mockSessionRequest();
     service.createSession(req);
   }
+
+  @Test
+  public void remover(){
+
+    var r = DtoHelper.generateUserRegistrationRequestAsString();
+    System.out.println(r);
+  }
+
+
 
   @BeforeMethod()
   public void resetCount(){

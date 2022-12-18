@@ -1,7 +1,5 @@
 package design.boilerplate.springboot.service;
 
-import static org.mockito.ArgumentMatchers.any;
-
 import design.boilerplate.springboot.repository.TopicRepository;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import org.mockito.InjectMocks;

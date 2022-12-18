@@ -1,7 +1,7 @@
 package design.boilerplate.springboot.controller;
 
-import design.boilerplate.springboot.model.dto.RegistrationRequest;
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
+import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
 import design.boilerplate.springboot.service.UserService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class UserController {
 
   @PostMapping()
   public ResponseEntity<RegistrationResponse> registrationRequest(
-      @Valid @RequestBody RegistrationRequest registrationRequest) {
+      @Valid @RequestBody UserRegistrationRequest registrationRequest) {
 
     final RegistrationResponse registrationResponse = userService.registration(registrationRequest);
 
@@ -35,7 +35,7 @@ public class UserController {
   @SneakyThrows
   @PostMapping("/v2")
   public ResponseEntity<RegistrationResponse> registrationRequestV2(
-      @Valid @RequestBody RegistrationRequest registrationRequest) {
+      @Valid @RequestBody UserRegistrationRequest registrationRequest) {
 
     final RegistrationResponse registrationResponse = userService.registrationV2(registrationRequest);
 

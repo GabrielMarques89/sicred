@@ -11,6 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LoginRequest {
 
+	public LoginRequest(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
 	@NotEmpty(message = "{login_username_not_empty}")
 	private String username;
 

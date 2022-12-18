@@ -1,12 +1,13 @@
 package design.boilerplate.springboot.service;
 
 import design.boilerplate.springboot.model.Session;
+import design.boilerplate.springboot.model.User;
 import design.boilerplate.springboot.model.VoteResult;
-import design.boilerplate.springboot.repository.SessionRepository;
-import design.boilerplate.springboot.repository.VoteRepository;
 import design.boilerplate.springboot.model.dto.VoteCountDto;
 import design.boilerplate.springboot.model.dto.VoteRequest;
 import design.boilerplate.springboot.model.mapper.VoteMapper;
+import design.boilerplate.springboot.repository.SessionRepository;
+import design.boilerplate.springboot.repository.VoteRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,9 @@ public class VoteServiceImpl implements VoteService {
   private final VoteValidationService voteValidationService;
 
   @Override
-  public void registerVote(VoteRequest req) {
+  public void registerVote(VoteRequest req, User user) {
     var vote = VoteMapper.INSTANCE.convertToVote(req);
+    vote.setUser(user);
     vote = voteValidationService.validateVote(vote);
 
     voteRepository.save(vote);

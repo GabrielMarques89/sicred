@@ -1,12 +1,16 @@
 package design.boilerplate.springboot.service;
 
+import com.google.gson.Gson;
 import design.boilerplate.springboot.client.CpfApiInterface;
 import design.boilerplate.springboot.exceptions.RegistrationException;
+import design.boilerplate.springboot.model.dto.CpfResponse;
+import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
 import design.boilerplate.springboot.repository.UserRepository;
-import design.boilerplate.springboot.model.dto.RegistrationRequest;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import feign.Feign;
+import feign.FeignException;
 import feign.gson.GsonDecoder;
+import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,14 +26,17 @@ public class UserValidationService {
   private static final String INVALID_CPF = "invalid_cpf";
 
   private static final String USERNAME_ALREADY_EXISTS = "username_already_exists";
+  public static final String INVALID_CPF_CODE = "100";
 
   private final UserRepository userRepository;
 
+  private CpfApiInterface cpfApiInterface = Feign.builder().decoder(new GsonDecoder())
+      .target(CpfApiInterface.class,
+          "https://api.cpfcnpj.com.br/5ae973d7a997af13f0aaf2bf60e65803/1/");
+
   private final ExceptionMessageAccessor exceptionMessageAccessor;
 
-  public void validateUser(RegistrationRequest registrationRequest) {
-
-
+  public void validateUser(UserRegistrationRequest registrationRequest) {
     checkEmail(registrationRequest.getEmail());
     checkCpf(registrationRequest.getCpf());
     checkUsername(registrationRequest.getUsername());
@@ -58,14 +65,42 @@ public class UserValidationService {
       throw new RegistrationException(existsEmail);
     }
 
-    var client =  Feign.builder()
-        .decoder(new GsonDecoder())
-        .target(CpfApiInterface.class, "https://api.cpfcnpj.com.br/5ae973d7a997af13f0aaf2bf60e65803/1/");
+    validateCpfIntegration(cpf);
+  }
 
-    var result = client.getPosts(cpf);
-    if(!result.isValidCpf()){
-      log.warn("Cpf {} is invalid!", cpf);
+  private void validateCpfIntegration(String cpf) {
+    try {
+      var result = cpfApiInterface.getPosts(cpf);
+      if (!result.isValidCpf()) {
+        log.warn("Cpf {} is invalid!", cpf);
 
+        final String existsEmail = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+        throw new RegistrationException(existsEmail);
+      }
+      return;
+    } catch (FeignException e) {
+      log.error("Cpf {} is invalid!", e);
+      if (e.responseBody().isPresent() && e.status() == 400) {
+        try {
+          readErrorResponse(cpf, e);
+        } catch (Exception ex) {
+          //Tratamento genérico de exceção - por não ter tempo de analisar a documentação da API
+          //e entender os possíveis erros e modelos de dados retornados
+          log.error("Unexpected error accessing CPF API", ex);
+          throw ex;
+        }
+      }
+
+      final String existsEmail = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+      throw new RegistrationException(existsEmail);
+    }
+  }
+
+  private void readErrorResponse(String cpf, FeignException e) {
+    var errorResult = new Gson().fromJson(
+        new String(e.responseBody().get().array(), StandardCharsets.UTF_8),
+        CpfResponse.class);
+    if (UserValidationService.INVALID_CPF_CODE.equals(errorResult.getErroCodigo())) {
       final String existsEmail = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
       throw new RegistrationException(existsEmail);
     }

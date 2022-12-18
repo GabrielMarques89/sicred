@@ -1,8 +1,8 @@
 package design.boilerplate.springboot.service;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
-import design.boilerplate.springboot.repository.TopicRepository;
 import design.boilerplate.springboot.model.dto.TopicRequest;
+import design.boilerplate.springboot.repository.TopicRepository;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

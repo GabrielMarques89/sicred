@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class RegistrationRequest {
+public class UserRegistrationRequest {
 
 	@NotEmpty(message = "{registration_name_not_empty}")
 	private String name;

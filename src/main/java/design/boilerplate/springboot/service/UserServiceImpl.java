@@ -2,11 +2,11 @@ package design.boilerplate.springboot.service;
 
 import design.boilerplate.springboot.model.User;
 import design.boilerplate.springboot.model.UserRole;
-import design.boilerplate.springboot.repository.UserRepository;
 import design.boilerplate.springboot.model.dto.AuthenticatedUserDto;
-import design.boilerplate.springboot.model.dto.RegistrationRequest;
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
+import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
 import design.boilerplate.springboot.model.mapper.UserMapper;
+import design.boilerplate.springboot.repository.UserRepository;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
 import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import lombok.RequiredArgsConstructor;
@@ -42,14 +42,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public RegistrationResponse registrationV2(RegistrationRequest registrationRequest)
+	public RegistrationResponse registrationV2(UserRegistrationRequest registrationRequest)
 			throws NotImplementedException {
 		//TODO: Implementar lógica adicional
 		throw new NotImplementedException("Yet to implement");
 	}
 
 
-	public RegistrationResponse registration(RegistrationRequest registrationRequest) {
+	public RegistrationResponse registration(UserRegistrationRequest registrationRequest) {
 
 		userValidationService.validateUser(registrationRequest);
 

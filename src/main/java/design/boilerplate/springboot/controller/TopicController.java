@@ -2,6 +2,7 @@ package design.boilerplate.springboot.controller;
 
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
 import design.boilerplate.springboot.model.dto.TopicRequest;
+import design.boilerplate.springboot.model.dto.TopicResponse;
 import design.boilerplate.springboot.service.TopicService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,14 @@ public class TopicController {
     topicService.createTopic(topicRequest);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(null);
+  }
+
+  @PostMapping("/v2")
+  public ResponseEntity<TopicResponse> createTopicV2(
+      @Valid @RequestBody TopicRequest topicRequest) {
+
+    var result = topicService.createTopicV2(topicRequest);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(result);
   }
 }

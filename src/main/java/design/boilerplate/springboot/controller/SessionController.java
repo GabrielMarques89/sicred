@@ -1,6 +1,7 @@
 package design.boilerplate.springboot.controller;
 
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
+import design.boilerplate.springboot.model.dto.SessionCreationResponse;
 import design.boilerplate.springboot.model.dto.SessionOpenningRequest;
 import design.boilerplate.springboot.model.dto.SessionRequest;
 import design.boilerplate.springboot.service.SessionService;
@@ -30,11 +31,16 @@ public class SessionController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
 
-	@PutMapping()
+	@PostMapping("/v2")
+	public ResponseEntity<SessionCreationResponse> createSessionV2(@RequestBody SessionRequest sessionRequest) {
+		var result = sessionService.createSessionV2(sessionRequest);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(result);
+	}
+
+	@PutMapping("/begin")
 	public ResponseEntity<RegistrationResponse> createSession(@Valid @RequestBody SessionOpenningRequest sessionRequest) {
 		sessionService.beginSession(sessionRequest);
-
-		//TODO: Internacionalizar
-		return ResponseEntity.status(HttpStatus.CREATED).body(new RegistrationResponse("Votação iniciada com sucesso"));
+		return ResponseEntity.status(HttpStatus.OK).body(new RegistrationResponse("Votação iniciada com sucesso"));
 	}
 }

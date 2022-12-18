@@ -24,25 +24,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/vote")
 public class VoteController {
-	private final VoteService voteService;
-	private final UserService userService;
 
-	@PostMapping()
-	public ResponseEntity<RegistrationResponse> registerVote(@Valid @RequestBody VoteRequest req) {
-		req.setUser(getLoggedUser());
-		voteService.registerVote(req);
+  private final VoteService voteService;
+  private final UserService userService;
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(new RegistrationResponse("Your vote has been registered"));
-	}
+  @PostMapping()
+  public ResponseEntity<RegistrationResponse> registerVote(@Valid @RequestBody VoteRequest req) {
+    voteService.registerVote(req, getLoggedUser());
 
-	@GetMapping("/countBySession")
-	public ResponseEntity<VoteCountDto> countBySession(Long sessionId) {
-		var result = voteService.countVotes(sessionId);
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(new RegistrationResponse("Voto registrado"));
+  }
 
-		return ResponseEntity.status(HttpStatus.OK).body(result);
-	}
-	private design.boilerplate.springboot.model.User getLoggedUser() {
-		return userService.findByUsername(((User) SecurityContextHolder.getContext().getAuthentication()
-				.getPrincipal()).getUsername());
-	}
+  @GetMapping("/countBySession")
+  public ResponseEntity<VoteCountDto> countBySession(Long sessionId) {
+    var result = voteService.countVotes(sessionId);
+
+    return ResponseEntity.status(HttpStatus.OK).body(result);
+  }
+
+  private design.boilerplate.springboot.model.User getLoggedUser() {
+    return userService.findByUsername(((User) SecurityContextHolder.getContext().getAuthentication()
+        .getPrincipal()).getUsername());
+  }
 }

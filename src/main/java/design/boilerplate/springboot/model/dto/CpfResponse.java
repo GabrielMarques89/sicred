@@ -17,6 +17,8 @@ public class CpfResponse {
   private String saldo;
   private String consultaID;
   private String delay;
+  private String erroCodigo;
+  private String erro;
 
   public boolean isValidCpf(){
     return !INVALID_STATUS.equals(status);

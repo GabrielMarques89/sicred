@@ -2,6 +2,7 @@ package design.boilerplate.springboot.exceptions;
 
 import design.boilerplate.springboot.exceptions.response.ApiExceptionResponse;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
+import feign.FeignException;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
@@ -19,7 +20,7 @@ public class GenericErrorHandler extends ResponseEntityExceptionHandler {
   @Autowired
   private ExceptionMessageAccessor exceptionMessageAccessor;
 
-  @ExceptionHandler({NoSuchMessageException.class})
+  @ExceptionHandler({NoSuchMessageException.class, FeignException.class})
   public ResponseEntity<ApiExceptionResponse> handleExceptions( Exception exception, WebRequest webRequest) {
     var response = new ApiExceptionResponse();
     logger.error(exception.getMessage(), exception);

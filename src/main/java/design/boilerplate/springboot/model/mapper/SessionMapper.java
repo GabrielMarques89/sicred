@@ -1,6 +1,7 @@
 package design.boilerplate.springboot.model.mapper;
 
 import design.boilerplate.springboot.model.Session;
+import design.boilerplate.springboot.model.dto.SessionCreationResponse;
 import design.boilerplate.springboot.model.dto.SessionRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,4 +16,5 @@ public interface SessionMapper {
 
 	@Mapping(target = "topic.id", source = "topic")
 	Session convert(SessionRequest sessionRequest);
+	SessionCreationResponse map(Session sessionRequest);
 }

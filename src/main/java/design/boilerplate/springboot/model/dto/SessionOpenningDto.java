@@ -8,14 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SessionOpenningRequest {
+public class SessionOpenningDto {
 
-	public SessionOpenningRequest(String session, int duration) {
-		this.session = Long.parseLong(session);
+	public SessionOpenningDto(String session, int duration) {
+		this.session = session;
 		this.duration = duration;
 	}
 
-	private Long session;
+	private String session;
 
 	private int duration;
 }

@@ -1,12 +1,9 @@
 package design.boilerplate.springboot.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.clearInvocations;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static util.DtoHelper.mockSessionRequest;
 import static util.DtoHelper.mockTopicRequest;
 
 import design.boilerplate.springboot.repository.TopicRepository;

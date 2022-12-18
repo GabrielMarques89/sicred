@@ -7,8 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class SecurityConstants {
 
-	// FIXME : Customize security constants for your application.
-
 	/**
 	 * Token expiration time 1 days.
 	 */

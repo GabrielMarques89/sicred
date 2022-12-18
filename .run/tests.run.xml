@@ -1,7 +1,14 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="tests" type="TestNG">
     <shortenClasspath name="NONE" />
-    <option name="SUITE_NAME" value="" />
+    <useClassPathOnly />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="design.boilerplate.springboot.service.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
     <option name="PACKAGE_NAME" value="" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
