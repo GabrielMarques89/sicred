@@ -15,7 +15,6 @@ import static util.DtoHelper.generateUserRegistrationRequest;
 import com.google.gson.Gson;
 import design.boilerplate.springboot.model.VoteResult;
 import design.boilerplate.springboot.model.dto.LoginRequest;
-import design.boilerplate.springboot.model.dto.SessionDto;
 import design.boilerplate.springboot.model.dto.SessionRequest;
 import design.boilerplate.springboot.model.dto.TopicRequest;
 import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
