@@ -13,11 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableJpaRepositories
 @EnableAspectJAutoProxy
 @EnableFeignClients
-public class SpringBootBoilerplateApplication {
+public class SicredApplication {
 
   public static void main(String[] args) {
 
-    SpringApplication.run(SpringBootBoilerplateApplication.class, args);
+    SpringApplication.run(SicredApplication.class, args);
   }
 
   @Bean
