@@ -30,7 +30,7 @@ public class TopicValidationService {
 
       log.warn("{} is already being used!", topicName);
 
-      final String existsTopicname = exceptionMessageAccessor.getMessage(null,
+      final String existsTopicname = exceptionMessageAccessor.getMessage(
           TOPIC_ALREADY_EXISTS);
       throw new RegistrationException(existsTopicname);
     }

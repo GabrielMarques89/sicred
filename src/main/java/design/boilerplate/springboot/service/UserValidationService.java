@@ -47,8 +47,8 @@ public class UserValidationService {
     if (existsByUsername) {
       log.warn("{} is already being used!", username);
 
-      final String existsUsername = exceptionMessageAccessor.getMessage(null,
-          USERNAME_ALREADY_EXISTS);
+      final String existsUsername = exceptionMessageAccessor.getMessage((
+          USERNAME_ALREADY_EXISTS));
       throw new RegistrationException(existsUsername);
     }
   }
@@ -59,7 +59,7 @@ public class UserValidationService {
     if (existsByCpf) {
       log.warn("{} is already being used!", cpf);
 
-      final String existsEmail = exceptionMessageAccessor.getMessage(null, CPF_ALREADY_EXISTS);
+      final String existsEmail = exceptionMessageAccessor.getMessage(( CPF_ALREADY_EXISTS));
       throw new RegistrationException(existsEmail);
     }
 
@@ -73,7 +73,7 @@ public class UserValidationService {
       if (!result.isValidCpf()) {
         log.warn("Cpf {} is invalid!", cpf);
 
-        final String invalidCpf = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+        final String invalidCpf = exceptionMessageAccessor.getMessage(INVALID_CPF, cpf);
         throw new RegistrationException(invalidCpf);
       }
     } catch (FeignException e) {
@@ -91,7 +91,7 @@ public class UserValidationService {
         }
       }
 
-      final String invalidCpf = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+      final String invalidCpf = exceptionMessageAccessor.getMessage(INVALID_CPF, cpf);
       throw new RegistrationException(invalidCpf);
     }
   }
@@ -109,7 +109,7 @@ public class UserValidationService {
         new String(e.responseBody().get().array(), StandardCharsets.UTF_8),
         CpfResponse.class);
     if (UserValidationService.INVALID_CPF_CODE.equals(errorResult.getErroCodigo())) {
-      String invalidCpf = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+      String invalidCpf = exceptionMessageAccessor.getMessage(INVALID_CPF, cpf);
       throw new RegistrationException(invalidCpf);
     }
   }
@@ -122,7 +122,7 @@ public class UserValidationService {
 
       log.warn("{} is already being used!", email);
 
-      final String existsEmail = exceptionMessageAccessor.getMessage(null, EMAIL_ALREADY_EXISTS);
+      final String existsEmail = exceptionMessageAccessor.getMessage(EMAIL_ALREADY_EXISTS);
       throw new RegistrationException(existsEmail);
     }
   }

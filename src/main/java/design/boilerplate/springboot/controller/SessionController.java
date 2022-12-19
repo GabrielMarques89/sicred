@@ -33,7 +33,7 @@ public class SessionController {
 
   @PostMapping("/v2")
   public ResponseEntity<SessionCreationResponse> createSessionV2(
-      @RequestBody SessionRequest sessionRequest) {
+      @Valid @RequestBody SessionRequest sessionRequest) {
     var result = sessionService.createSessionV2(sessionRequest);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(result);

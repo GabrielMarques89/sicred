@@ -34,7 +34,6 @@ public class Session {
   @Column(nullable = false)
   private LocalDateTime beginDateTime;
 
-  @Column(nullable = true)
   private LocalDateTime endDateTime;
 
   @ManyToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,6 @@
 package design.boilerplate.springboot.service;
 
+import static java.lang.String.format;
 import static java.time.ZoneOffset.UTC;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
@@ -57,7 +58,7 @@ public class VoteValidationService {
   private Session checkIfExists(Long id, Optional<Session> sessionResult) {
     if (sessionResult.isEmpty()) {
       throw new RegistrationException(
-          exceptionMessageAccessor.getMessage(null, SESSION_NOT_FOUND, String.valueOf(id)));
+          exceptionMessageAccessor.getMessage(SESSION_NOT_FOUND, String.valueOf(id)));
     }
     return sessionResult.get();
   }
@@ -65,14 +66,14 @@ public class VoteValidationService {
   private void checkIfEnded(Session session, long now) {
     if (sessionAlreadyEnded(session, now)) {
       throw new RegistrationException(
-          exceptionMessageAccessor.getMessage(null, SESSION_ALREADY_ENDED));
+          exceptionMessageAccessor.getMessage(SESSION_ALREADY_ENDED));
     }
   }
 
   private void checkIfStarted(Session session, long now) {
     if (sessionNotStarted(session, now)) {
       throw new RegistrationException(
-          exceptionMessageAccessor.getMessage(null, SESSION_NOT_STARTED));
+          exceptionMessageAccessor.getMessage(SESSION_NOT_STARTED));
     }
   }
 
@@ -93,12 +94,11 @@ public class VoteValidationService {
 
   private void checkIfUserAlreadyVoted(Topic topic, User user) {
     if (voteRepository.existsByUserAndTopic(user, topic)) {
-      var message = String.format(VOTE_ALREADY_EXISTS_FOR_TOPIC_AND_USER, topic.getId(),
-          user.getId());
+      var message = format(VOTE_ALREADY_EXISTS_FOR_TOPIC_AND_USER, topic.getId(),user.getId());
       log.warn(message);
 
       throw new RegistrationException(
-          exceptionMessageAccessor.getMessage(null, USER_ALREADY_VOTED));
+          exceptionMessageAccessor.getMessage(( USER_ALREADY_VOTED)));
     }
   }
 }

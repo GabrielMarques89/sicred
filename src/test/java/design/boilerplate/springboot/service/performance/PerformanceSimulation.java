@@ -121,11 +121,11 @@ public class PerformanceSimulation extends Simulation {
             .check(status().is(HTTTP_CREATED)).check(jsonPath("$.id").saveAs("sessionId")));
   }
 
-  Iterator<Map<String, Object>> userFeed = Stream.generate(
+  final Iterator<Map<String, Object>> userFeed = Stream.generate(
       (Supplier<Map<String, Object>>) () -> Collections.singletonMap("user",
           generateUserRegistrationRequest())).iterator();
 
-  Iterator<Map<String, Object>> topicFeeder =
+  final Iterator<Map<String, Object>> topicFeeder =
       Stream.generate((Supplier<Map<String, Object>>) () -> {
         String generatedTopicName = "Pauta Aleatória " + RandomStringUtils.randomAlphanumeric(20);
         return Collections.singletonMap("topic", generatedTopicName);

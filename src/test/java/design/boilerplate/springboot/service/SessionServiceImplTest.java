@@ -64,19 +64,19 @@ public class SessionServiceImplTest extends BaseSicredTest {
 
   @Test(expectedExceptions = RuntimeException.class)
   public void testGetSessionFail() {
-    mockFindSessionOnRepo(java.util.Optional.empty());
+    mockFindSessionOnRepo(null);
 
     service.getSession(1L);
     verify(sessionRepository, times(1)).findById(any());
   }
 
-  private void mockFindSessionOnRepo(Optional<Session> model) {
-    when(sessionRepository.findById(any())).thenReturn(model);
+  private void mockFindSessionOnRepo(Session model) {
+    when(sessionRepository.findById(any())).thenReturn(Optional.ofNullable(model));
   }
 
   private Session mockValidSession() {
     var session = ModelHelper.mockSession();
-    mockFindSessionOnRepo(Optional.of(session));
+    mockFindSessionOnRepo(session);
 
     return session;
   }

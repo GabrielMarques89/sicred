@@ -24,14 +24,14 @@ public class SessionValidationService {
   public void validateSession(Session session) {
     if (sessionRepo.existsByTopic(session.getTopic())) {
       log.warn("Topic already exists!");
-      final String invalidTopic = exceptionMessageAccessor.getMessage(null, TOPIC_ALREADY_IN_USE);
+      final String invalidTopic = exceptionMessageAccessor.getMessage(TOPIC_ALREADY_IN_USE);
       throw new RegistrationException(invalidTopic);
     }
 
     var topic = topicService.getTopic(session.getTopic().getId());
     if (topic == null) {
 
-      final String fail_because_of_topic_id = exceptionMessageAccessor.getMessage(null,
+      final String fail_because_of_topic_id = exceptionMessageAccessor.getMessage(
           INVALID_TOPIC, session.getTopic().getId());
       log.warn("Topic {} not found", session.getTopic().getId());
       throw new RegistrationException(fail_because_of_topic_id);

@@ -53,9 +53,8 @@ public class DtoHelper {
     user.setPassword("password");
     user.setEmail(cpf + "@company.com");
     Gson gson = new Gson();
-    var response = gson.toJson(user);
 
-    return response;
+    return gson.toJson(user);
   }
 
   public static SessionOpenningRequest mockSessionOpenningRequest() {

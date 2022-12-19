@@ -25,11 +25,10 @@ public class GenericErrorHandler extends ResponseEntityExceptionHandler {
       WebRequest webRequest) {
     var response = new ApiExceptionResponse();
     logger.error(exception.getMessage(), exception);
-    response.setMessage(exceptionMessageAccessor.getMessage(null, GENERIC_ERROR));
+    response.setMessage(exceptionMessageAccessor.getMessage(GENERIC_ERROR));
     response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
     response.setTime(LocalDateTime.now());
-    ResponseEntity<ApiExceptionResponse> entity = new ResponseEntity<>(response,
+    return new ResponseEntity<>(response,
         HttpStatus.INTERNAL_SERVER_ERROR);
-    return entity;
   }
 }

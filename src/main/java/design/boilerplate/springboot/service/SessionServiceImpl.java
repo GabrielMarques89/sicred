@@ -25,6 +25,7 @@ public class SessionServiceImpl implements SessionService {
   private final ExceptionMessageAccessor exceptionMessageAccessor;
   private final GeneralMessageAccessor generalMessageAccessor;
   private final String INVALID_SESSION = "invalid_session";
+  private final String INVALID_DURATION = "invalid_duration";
 
 
   public SessionCreationResponse createSessionV2(SessionRequest topic) {
@@ -37,8 +38,11 @@ public class SessionServiceImpl implements SessionService {
     log.info("Creating session");
     var session = SessionMapper.INSTANCE.convert(sessionRequest);
     session.setBeginDateTime(LocalDateTime.now());
-    if (sessionRequest.getDuration() != 0) {
+    var duration = sessionRequest.getDuration();
+    if (duration != null &&  duration > 0) {
       session.setEndDateTime(session.getBeginDateTime().plusMinutes(sessionRequest.getDuration()));
+    } else if(duration < 0){
+      throw new RuntimeException(exceptionMessageAccessor.getMessage((INVALID_DURATION)));
     } else {
       session.setEndDateTime(session.getBeginDateTime().plusMinutes(1));
     }
@@ -50,6 +54,6 @@ public class SessionServiceImpl implements SessionService {
 
   public Session getSession(Long sessionId) {
     return sessionRepository.findById(sessionId).orElseThrow(
-        () -> new RuntimeException(exceptionMessageAccessor.getMessage(null, INVALID_SESSION)));
+        () -> new RuntimeException(exceptionMessageAccessor.getMessage((INVALID_SESSION))));
   }
 }

@@ -16,6 +16,10 @@ public class GeneralMessageAccessor {
     this.messageSource = messageSource;
   }
 
+  public String getMessage(String key, Object... parameter) {
+    return getMessage(null, key, parameter);
+  }
+
   public String getMessage(Locale locale, String key, Object... parameter) {
 
     if (Objects.isNull(locale)) {

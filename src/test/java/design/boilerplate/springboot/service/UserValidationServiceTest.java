@@ -58,7 +58,7 @@ public class UserValidationServiceTest extends BaseSicredTest {
     var ex = mock(FeignException.class);
     Mockito.when(ex.status()).thenReturn(400);
     when(ex.responseBody()).thenReturn(
-        Optional.of(ByteBuffer.wrap(bodyError.toString().getBytes(StandardCharsets.UTF_8))));
+        Optional.of(ByteBuffer.wrap(bodyError.getBytes(StandardCharsets.UTF_8))));
     when(cpfApiInterface.getCpfInfo(any())).thenThrow(ex);
 
     service.validateUser(req);
