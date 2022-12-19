@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
-@RestControllerAdvice(basePackageClasses = UserController.class)
+@RestControllerAdvice
 public class RegistrationControllerAdvice {
 
   @ExceptionHandler(RegistrationException.class)
