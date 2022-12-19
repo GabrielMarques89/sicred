@@ -3,6 +3,7 @@ package util;
 import java.time.LocalDateTime;
 
 public class MockValuesConstants {
+
   public static final int DEFAULT_DURATION = 30;
   public static final LocalDateTime NOW = LocalDateTime.now();
   public static final long DEFAULT_SESSION_ID = 33L;

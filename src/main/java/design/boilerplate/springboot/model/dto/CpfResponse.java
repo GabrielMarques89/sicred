@@ -20,7 +20,7 @@ public class CpfResponse {
   private String erroCodigo;
   private String erro;
 
-  public boolean isValidCpf(){
+  public boolean isValidCpf() {
     return !INVALID_STATUS.equals(status);
   }
 }

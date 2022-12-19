@@ -18,7 +18,7 @@ public class TopicServiceImpl implements TopicService {
   private final TopicRepository topicRepository;
   private final TopicValidationService topicValidationService;
 
-  public TopicResponse createTopicV2(TopicRequest topic){
+  public TopicResponse createTopicV2(TopicRequest topic) {
     var entity = createTopic(topic);
     return TopicMapper.INSTANCE.map(entity);
   }
@@ -32,7 +32,7 @@ public class TopicServiceImpl implements TopicService {
     return topic;
   }
 
-  public Topic getTopic(Long id){
+  public Topic getTopic(Long id) {
     return topicRepository.findById(id).orElse(null);
   }
 }

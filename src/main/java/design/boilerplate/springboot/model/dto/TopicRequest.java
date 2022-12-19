@@ -11,10 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TopicRequest {
 
-	public TopicRequest(String name) {
-		this.name = name;
-	}
+  public TopicRequest(String name) {
+    this.name = name;
+  }
 
-	@NotEmpty(message = "{login_username_not_empty}")
-	private String name;
+  @NotEmpty(message = "{login_username_not_empty}")
+  private String name;
 }

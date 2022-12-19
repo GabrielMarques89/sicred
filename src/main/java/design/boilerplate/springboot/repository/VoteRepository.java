@@ -13,6 +13,8 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
   boolean existsByUserAndTopic(User user, Topic topic);
 
   Long countByTopic(Topic topic);
+
   Long countBySession(Session topic);
+
   Long countByTopicAndVoteResult(Topic topic, VoteResult voteResult);
 }

@@ -7,8 +7,10 @@ import design.boilerplate.springboot.model.dto.VoteCountDto;
 import design.boilerplate.springboot.model.dto.VoteRequest;
 
 public interface VoteService {
+
   void registerVote(VoteRequest req, User user);
 
   VoteCountDto countVotes(Session session);
+
   VoteCountDto countVotes(Long session);
 }

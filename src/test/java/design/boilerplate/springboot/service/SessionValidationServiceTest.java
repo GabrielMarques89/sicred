@@ -13,6 +13,7 @@ import util.BaseSicredTest;
 import util.ModelHelper;
 
 public class SessionValidationServiceTest extends BaseSicredTest {
+
   @Mock
   private SessionRepository sessionRepository;
   @InjectMocks

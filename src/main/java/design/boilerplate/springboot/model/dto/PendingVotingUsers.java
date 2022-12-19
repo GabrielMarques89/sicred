@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PendingVotingUsers {
+
   List<String> users;
   private Long TotalTopicPendingVotes;
 }

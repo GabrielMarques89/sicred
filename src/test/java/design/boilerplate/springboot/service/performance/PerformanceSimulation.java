@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import design.boilerplate.springboot.model.VoteResult;
 import design.boilerplate.springboot.model.dto.LoginRequest;
 import design.boilerplate.springboot.model.dto.SessionDto;
-import design.boilerplate.springboot.model.dto.SessionOpenningDto;
+import design.boilerplate.springboot.model.dto.SessionRequest;
 import design.boilerplate.springboot.model.dto.TopicRequest;
 import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
 import io.gatling.javaapi.core.ChainBuilder;
@@ -53,7 +53,8 @@ public class PerformanceSimulation extends Simulation {
   private Long sessionId;
   private Queue<UserRegistrationRequest> feederUsers;
   private final GeraCpfCnpj cpfGenerator = new GeraCpfCnpj();
-  private final String sessionDate = LocalDateTime.now().minusMinutes(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+  private final String sessionDate = LocalDateTime.now().minusMinutes(5)
+      .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
   public PerformanceSimulation() {
 //    var prepareSessionScenario = postUserAndLogin().injectOpen(rampUsers(100).during(15));
@@ -62,7 +63,8 @@ public class PerformanceSimulation extends Simulation {
   }
 
   private ScenarioBuilder prepareSession() {
-    return scenario("creating_session").exec(createUser(), loginUser(), createTopic(), createSession());
+    return scenario("creating_session").exec(createUser(), loginUser(), createTopic(),
+        createSession());
   }
 
   private HttpProtocolBuilder httpProtocol() {
@@ -82,25 +84,27 @@ public class PerformanceSimulation extends Simulation {
                 .check(status().is(HTTTP_CREATED)))
             .exec(session -> {
               var user = (UserRegistrationRequest) session.get("user");
-              var loginRequest = gson.toJson(new LoginRequest(user.getUsername(), user.getPassword()));
+              var loginRequest = gson.toJson(
+                  new LoginRequest(user.getUsername(), user.getPassword()));
               return session.set("loginRequest", loginRequest);
             });
   }
 
   private ChainBuilder loginUser() {
     return exec(http("login").post(LOGIN_URL)
-                .body(StringBody(session -> session.get("loginRequest")))
-                .check(status().is(HTTP_OK))
-                .check(jsonPath("$.token").saveAs("token")));
+        .body(StringBody(session -> session.get("loginRequest")))
+        .check(status().is(HTTP_OK))
+        .check(jsonPath("$.token").saveAs("token")));
   }
 
   private ChainBuilder createTopic() {
     return
         feed(topicFeeder)
-        .exec(http("create_topic").post(CREATE_TOPIC_URL).header("Authorization", "Bearer #{token}")
-        .body(StringBody(session -> gson.toJson(new TopicRequest(session.get("topic")))))
-        .check(status().is(HTTTP_CREATED))
-        .check(jsonPath("$.id").saveAs("topicId")));
+            .exec(http("create_topic").post(CREATE_TOPIC_URL)
+                .header("Authorization", "Bearer #{token}")
+                .body(StringBody(session -> gson.toJson(new TopicRequest(session.get("topic")))))
+                .check(status().is(HTTTP_CREATED))
+                .check(jsonPath("$.id").saveAs("topicId")));
   }
 
 
@@ -108,21 +112,14 @@ public class PerformanceSimulation extends Simulation {
     return
         exec(session -> {
           var topic = session.getString("topicId");
-          var sessionRequest = gson.toJson(new SessionDto(topic, sessionDate));
+          var sessionRequest = gson.toJson(new SessionRequest(Long.parseLong(topic), 15L));
           return session.set("sessionRequest", sessionRequest);
         })
-            .exec(http("create_session").post(CREATE_SESSION_URL)
-                .header("Authorization", "Bearer #{token}")
-                .body(StringBody(session -> session.get("sessionRequest")))
-                .asJson()
-                .check(status().is(HTTTP_CREATED)).check(jsonPath("$.id").saveAs("sessionId")));
-  }
-
-  private ChainBuilder openSession(int duration) {
-    return exec(
-        http("open_session").put("/session/begin").header("Authorization", "Bearer #{token}")
-            .body(StringBody(gson.toJson(new SessionOpenningDto("${sessionId}", 10))))
-            .check(status().is(HTTP_OK)));
+        .exec(http("create_session").post(CREATE_SESSION_URL)
+            .header("Authorization", "Bearer #{token}")
+            .body(StringBody(session -> session.get("sessionRequest")))
+            .asJson()
+            .check(status().is(HTTTP_CREATED)).check(jsonPath("$.id").saveAs("sessionId")));
   }
 
   Iterator<Map<String, Object>> userFeed = Stream.generate(

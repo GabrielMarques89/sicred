@@ -10,12 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SessionOpenningRequest {
 
-	public SessionOpenningRequest(String session, int duration) {
-		this.session = Long.parseLong(session);
-		this.duration = duration;
-	}
+  public SessionOpenningRequest(String session, int duration) {
+    this.session = Long.parseLong(session);
+    this.duration = duration;
+  }
 
-	private Long session;
+  private Long session;
 
-	private int duration;
+  private int duration;
 }

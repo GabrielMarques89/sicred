@@ -13,26 +13,28 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SessionValidationService {
-	private final SessionRepository sessionRepo;
-	private final TopicService topicService;
 
-	private final ExceptionMessageAccessor exceptionMessageAccessor;
-	private final String INVALID_TOPIC = "invalid_topic";
-	private final String TOPIC_ALREADY_IN_USE = "topic_already_exists";
+  private final SessionRepository sessionRepo;
+  private final TopicService topicService;
 
-	public void validateSession(Session session) {
-		if(sessionRepo.existsByTopic(session.getTopic())) {
-			log.warn("Topic already exists!");
-			final String invalidTopic = exceptionMessageAccessor.getMessage(null, TOPIC_ALREADY_IN_USE);
-			throw new RegistrationException(invalidTopic);
-		}
+  private final ExceptionMessageAccessor exceptionMessageAccessor;
+  private final String INVALID_TOPIC = "invalid_topic";
+  private final String TOPIC_ALREADY_IN_USE = "topic_already_exists";
 
-		var topic = topicService.getTopic(session.getTopic().getId());
-		if(topic == null){
+  public void validateSession(Session session) {
+    if (sessionRepo.existsByTopic(session.getTopic())) {
+      log.warn("Topic already exists!");
+      final String invalidTopic = exceptionMessageAccessor.getMessage(null, TOPIC_ALREADY_IN_USE);
+      throw new RegistrationException(invalidTopic);
+    }
 
-			final String fail_because_of_topic_id = exceptionMessageAccessor.getMessage(null, INVALID_TOPIC, session.getTopic().getId());
-			log.warn("Topic {} not found", session.getTopic().getId());
-			throw new RegistrationException(fail_because_of_topic_id);
-		}
-	}
+    var topic = topicService.getTopic(session.getTopic().getId());
+    if (topic == null) {
+
+      final String fail_because_of_topic_id = exceptionMessageAccessor.getMessage(null,
+          INVALID_TOPIC, session.getTopic().getId());
+      log.warn("Topic {} not found", session.getTopic().getId());
+      throw new RegistrationException(fail_because_of_topic_id);
+    }
+  }
 }

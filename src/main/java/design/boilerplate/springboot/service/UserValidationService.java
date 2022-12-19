@@ -30,7 +30,7 @@ public class UserValidationService {
 
   private final UserRepository userRepository;
 
-  private CpfApiInterface cpfApiInterface = Feign.builder().decoder(new GsonDecoder())
+  private final CpfApiInterface cpfApiInterface = Feign.builder().decoder(new GsonDecoder())
       .target(CpfApiInterface.class,
           "https://api.cpfcnpj.com.br/5ae973d7a997af13f0aaf2bf60e65803/1/");
 
@@ -77,7 +77,6 @@ public class UserValidationService {
         final String existsEmail = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
         throw new RegistrationException(existsEmail);
       }
-      return;
     } catch (FeignException e) {
       log.error("Cpf {} is invalid!", e);
       if (e.responseBody().isPresent() && e.status() == 400) {

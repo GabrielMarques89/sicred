@@ -15,18 +15,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableFeignClients
 public class SpringBootBoilerplateApplication {
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-		SpringApplication.run(SpringBootBoilerplateApplication.class, args);
-	}
+    SpringApplication.run(SpringBootBoilerplateApplication.class, args);
+  }
 
-	@Bean
-	public BCryptPasswordEncoder encoder() {
-		return new BCryptPasswordEncoder();
-	}
+  @Bean
+  public BCryptPasswordEncoder encoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-	@Bean
-	public Contract useFeignAnnotations() {
-		return new Contract.Default();
-	}
+  @Bean
+  public Contract useFeignAnnotations() {
+    return new Contract.Default();
+  }
 }

@@ -12,9 +12,10 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SessionMapper {
 
-	SessionMapper INSTANCE = Mappers.getMapper(SessionMapper.class);
+  SessionMapper INSTANCE = Mappers.getMapper(SessionMapper.class);
 
-	@Mapping(target = "topic.id", source = "topic")
-	Session convert(SessionRequest sessionRequest);
-	SessionCreationResponse map(Session sessionRequest);
+  @Mapping(target = "topic.id", source = "topic")
+  Session convert(SessionRequest sessionRequest);
+
+  SessionCreationResponse map(Session sessionRequest);
 }

@@ -34,19 +34,20 @@ public class VoteServiceImpl implements VoteService {
   }
 
   @Override
-  public VoteCountDto countVotes(Long sessionId){
+  public VoteCountDto countVotes(Long sessionId) {
     var session = sessionRepository.findById(sessionId).orElseThrow();
     return countVotes(session);
   }
 
   @Override
-  public VoteCountDto countVotes(Session session){
+  public VoteCountDto countVotes(Session session) {
     log.info("Counting votes");
 
     var votes = new VoteCountDto();
 
     var votesByTopic = voteRepository.countByTopic(session.getTopic());
-    votes.setTotalYesVoteOnTopic(voteRepository.countByTopicAndVoteResult(session.getTopic(), VoteResult.YES));
+    votes.setTotalYesVoteOnTopic(
+        voteRepository.countByTopicAndVoteResult(session.getTopic(), VoteResult.YES));
     votes.setTotalNoVoteOnTopic(votesByTopic - votes.getTotalYesVoteOnTopic());
     votes.setTotalTopicVotes(votesByTopic);
     votes.setTotalTopicPendingVotes(userService.countUsers() - votesByTopic);

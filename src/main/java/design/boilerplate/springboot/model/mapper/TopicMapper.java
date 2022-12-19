@@ -11,8 +11,9 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TopicMapper {
 
-	TopicMapper INSTANCE = Mappers.getMapper(TopicMapper.class);
+  TopicMapper INSTANCE = Mappers.getMapper(TopicMapper.class);
 
-	Topic convertToTopic(TopicRequest request);
-	TopicResponse map(Topic model);
+  Topic convertToTopic(TopicRequest request);
+
+  TopicResponse map(Topic model);
 }

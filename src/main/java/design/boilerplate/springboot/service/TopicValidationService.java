@@ -15,23 +15,24 @@ import org.springframework.stereotype.Service;
 public class TopicValidationService {
 
 
-	private static final String TOPIC_ALREADY_EXISTS = "topic_already_exists";
+  private static final String TOPIC_ALREADY_EXISTS = "topic_already_exists";
 
-	private final TopicRepository topicRepo;
+  private final TopicRepository topicRepo;
 
-	private final ExceptionMessageAccessor exceptionMessageAccessor;
+  private final ExceptionMessageAccessor exceptionMessageAccessor;
 
-	public void validateTopic(TopicRequest registrationRequest) {
-		checkTopicname(registrationRequest.getName());
-	}
+  public void validateTopic(TopicRequest registrationRequest) {
+    checkTopicname(registrationRequest.getName());
+  }
 
-	private void checkTopicname(String topicName) {
-		if (topicRepo.existsByName(topicName)) {
+  private void checkTopicname(String topicName) {
+    if (topicRepo.existsByName(topicName)) {
 
-			log.warn("{} is already being used!", topicName);
+      log.warn("{} is already being used!", topicName);
 
-			final String existsTopicname = exceptionMessageAccessor.getMessage(null, TOPIC_ALREADY_EXISTS);
-			throw new RegistrationException(existsTopicname);
-		}
-	}
+      final String existsTopicname = exceptionMessageAccessor.getMessage(null,
+          TOPIC_ALREADY_EXISTS);
+      throw new RegistrationException(existsTopicname);
+    }
+  }
 }

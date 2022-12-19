@@ -18,5 +18,4 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
   boolean existsByTopic(Topic topic);
 
 
-
 }

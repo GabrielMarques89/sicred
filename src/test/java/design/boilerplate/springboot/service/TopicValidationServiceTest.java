@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import util.BaseSicredTest;
 
 public class TopicValidationServiceTest extends BaseSicredTest {
+
   @Mock
   private TopicRepository sessionRepository;
   @InjectMocks
@@ -19,7 +20,8 @@ public class TopicValidationServiceTest extends BaseSicredTest {
   @Mock
   private ExceptionMessageAccessor exceptionMessageAccessor;
 
-  @Test void something(){
+  @Test
+  void something() {
 
   }
 }

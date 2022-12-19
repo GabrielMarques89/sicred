@@ -39,7 +39,7 @@ public class UserServiceImplTest extends BaseSicredTest {
   private GeneralMessageAccessor generalMessageAccessor;
 
   @BeforeMethod()
-  public void resetCount(){
+  public void resetCount() {
     clearInvocations(repository);
   }
 

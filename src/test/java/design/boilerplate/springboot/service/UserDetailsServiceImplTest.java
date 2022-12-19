@@ -1,7 +1,5 @@
 package design.boilerplate.springboot.service;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static util.MockValuesConstants.DEFAULT_USERNAME;
@@ -16,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import util.BaseSicredTest;
 import util.ModelHelper;
@@ -36,11 +33,11 @@ public class UserDetailsServiceImplTest extends BaseSicredTest {
   private GeneralMessageAccessor generalMessageAccessor;
 
   @AfterMethod()
-  public void resetMocks(){
+  public void resetMocks() {
     reset(userService);
   }
 
-  @Test(priority=1)
+  @Test(priority = 1)
   public void testLoadUserByUsername() {
     var mockedUser = ModelHelper.mockUser(DEFAULT_USERNAME);
 
@@ -54,7 +51,7 @@ public class UserDetailsServiceImplTest extends BaseSicredTest {
     testAuthority(result, UserRole.USER);
   }
 
-  @Test(priority=0)
+  @Test(priority = 0)
   public void testLoadAdminUserByUsername() {
     var mockedUser = ModelHelper.mockAdminUser();
 
@@ -66,7 +63,8 @@ public class UserDetailsServiceImplTest extends BaseSicredTest {
   }
 
   private static void testAuthority(UserDetails result, UserRole admin) {
-    SimpleGrantedAuthority authority = (SimpleGrantedAuthority) result.getAuthorities().stream().findFirst().get();
-    Assert.assertTrue(authority.getAuthority().equals(admin.name()));
+    SimpleGrantedAuthority authority = (SimpleGrantedAuthority) result.getAuthorities().stream()
+        .findFirst().get();
+    Assert.assertEquals(admin.name(), authority.getAuthority());
   }
 }

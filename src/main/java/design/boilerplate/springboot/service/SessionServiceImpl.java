@@ -2,14 +2,12 @@ package design.boilerplate.springboot.service;
 
 import design.boilerplate.springboot.model.Session;
 import design.boilerplate.springboot.model.dto.SessionCreationResponse;
-import design.boilerplate.springboot.model.dto.SessionOpenningRequest;
-import design.boilerplate.springboot.model.dto.SessionOpenningResponse;
 import design.boilerplate.springboot.model.dto.SessionRequest;
 import design.boilerplate.springboot.model.mapper.SessionMapper;
 import design.boilerplate.springboot.repository.SessionRepository;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,6 +36,13 @@ public class SessionServiceImpl implements SessionService {
   public Session createSession(SessionRequest sessionRequest) {
     log.info("Creating session");
     var session = SessionMapper.INSTANCE.convert(sessionRequest);
+    session.setBeginDateTime(LocalDateTime.now());
+    if (sessionRequest.getDuration() != 0) {
+      session.setEndDateTime(session.getBeginDateTime().plusMinutes(sessionRequest.getDuration()));
+    } else {
+      session.setEndDateTime(session.getBeginDateTime().plusMinutes(1));
+    }
+
     sessionValidationService.validateSession(session);
 
     return sessionRepository.save(session);
@@ -46,22 +51,5 @@ public class SessionServiceImpl implements SessionService {
   public Session getSession(Long sessionId) {
     return sessionRepository.findById(sessionId).orElseThrow(
         () -> new RuntimeException(exceptionMessageAccessor.getMessage(null, INVALID_SESSION)));
-  }
-
-  public SessionOpenningResponse beginSession(SessionOpenningRequest request) {
-    log.info("Opening session");
-
-    var session = getSession(request.getSession());
-    session.setEndDateTime(
-        session.getBeginDateTime().plus(request.getDuration(), ChronoUnit.MINUTES));
-    sessionRepository.save(session);
-
-    var message = generalMessageAccessor.getMessage(null, SESSION_OPENED,
-        session.getBeginDateTime(), session.getEndDateTime(), session.getTopic().getName());
-
-    log.info("Session opened");
-
-    return new SessionOpenningResponse(session.getId(), session.getTopic().getName(),
-        message);
   }
 }

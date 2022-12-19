@@ -13,6 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SessionReportResponse {
 
-	private List<SessionReportDto> reports;
-	private int count;
+  private List<SessionReportDto> reports;
+  private int count;
 }

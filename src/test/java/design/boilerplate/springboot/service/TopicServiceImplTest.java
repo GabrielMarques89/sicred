@@ -28,7 +28,7 @@ public class TopicServiceImplTest extends BaseSicredTest {
   private ExceptionMessageAccessor exceptionMessageAccessor;
 
   @BeforeMethod()
-  public void resetCount(){
+  public void resetCount() {
     clearInvocations(repository);
   }
 

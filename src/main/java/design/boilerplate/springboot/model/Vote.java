@@ -22,26 +22,27 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "VOTES", uniqueConstraints = { @UniqueConstraint(columnNames = { "topic_id", "user_id" }) })
+@Table(name = "VOTES", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"topic_id", "user_id"})})
 public class Vote {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-	@OneToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+  @OneToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 
-	@OneToOne
-	@JoinColumn(name = "session_id", nullable = false)
-	private Session session;
+  @OneToOne
+  @JoinColumn(name = "session_id", nullable = false)
+  private Session session;
 
 
-	@ManyToOne
-	@JoinColumn(name = "topic_id", nullable = false)
-	private Topic topic;
+  @ManyToOne
+  @JoinColumn(name = "topic_id", nullable = false)
+  private Topic topic;
 
-	@Column(nullable = false)
-	private VoteResult voteResult;
+  @Column(nullable = false)
+  private VoteResult voteResult;
 }

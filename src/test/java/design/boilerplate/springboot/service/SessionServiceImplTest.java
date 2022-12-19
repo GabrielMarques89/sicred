@@ -7,21 +7,18 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
-import static util.DtoHelper.mockSessionOpenningRequest;
 import static util.DtoHelper.mockSessionRequest;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
 import design.boilerplate.springboot.model.Session;
 import design.boilerplate.springboot.repository.SessionRepository;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import util.BaseSicredTest;
-import util.DtoHelper;
 import util.ModelHelper;
 
 public class SessionServiceImplTest extends BaseSicredTest {
@@ -41,17 +38,8 @@ public class SessionServiceImplTest extends BaseSicredTest {
     service.createSession(req);
   }
 
-  @Test
-  public void remover(){
-
-    var r = DtoHelper.generateUserRegistrationRequestAsString();
-    System.out.println(r);
-  }
-
-
-
   @BeforeMethod()
-  public void resetCount(){
+  public void resetCount() {
     clearInvocations(sessionRepository);
   }
 
@@ -80,19 +68,6 @@ public class SessionServiceImplTest extends BaseSicredTest {
 
     service.getSession(1L);
     verify(sessionRepository, times(1)).findById(any());
-  }
-
-  @Test
-  public void beginSessionSuccess() {
-    var session = ModelHelper.mockSession();
-    mockFindSessionOnRepo(Optional.of(session));
-
-    var request = mockSessionOpenningRequest();
-    service.beginSession(request);
-
-    assertEquals(session.getEndDateTime(),
-        session.getBeginDateTime().plus(request.getDuration(), ChronoUnit.MINUTES));
-    verify(sessionRepository, times(1)).save(session);
   }
 
   private void mockFindSessionOnRepo(Optional<Session> model) {

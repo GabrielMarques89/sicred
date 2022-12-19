@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class HelloController {
 
-	private final UserService userService;
+  private final UserService userService;
 
-	@GetMapping("/hello")
-	public ResponseEntity<String> sayHello() {
+  @GetMapping("/hello")
+  public ResponseEntity<String> sayHello() {
 
-		var result = userService.findByUsername("teste");
-		return ResponseEntity.ok("Hello Spring Boot Boilerplate");
-	}
+    var result = userService.findByUsername("teste");
+    return ResponseEntity.ok("Hello Spring Boot Boilerplate");
+  }
 
 }

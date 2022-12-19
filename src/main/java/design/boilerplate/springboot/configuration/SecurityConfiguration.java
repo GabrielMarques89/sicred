@@ -21,31 +21,33 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
-	private final JwtAuthenticationFilter jwtAuthenticationFilter;
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-	private final JwtAuthenticationEntryPoint unauthorizedHandler;
+  private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
-	@Bean
-	public AuthenticationManager authenticationManager(final AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
-	}
+  @Bean
+  public AuthenticationManager authenticationManager(
+      final AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
+  }
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-		//@formatter:off
+    //@formatter:off
 
-		return http.cors().and().csrf().disable()
-				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-				.authorizeRequests()
-				.antMatchers("/user", "/login","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**").permitAll()
-				.anyRequest().authenticated().and()
-				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().build();
+    return http.cors().and().csrf().disable()
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+        .authorizeRequests()
+        .antMatchers("/user", "/login", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
+            "/actuator/**").permitAll()
+        .anyRequest().authenticated().and()
+        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and().build();
 
-		//@formatter:on
-	}
+    //@formatter:on
+  }
 
 
 }

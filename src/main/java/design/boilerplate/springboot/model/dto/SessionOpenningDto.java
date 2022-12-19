@@ -10,12 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SessionOpenningDto {
 
-	public SessionOpenningDto(String session, int duration) {
-		this.session = session;
-		this.duration = duration;
-	}
+  public SessionOpenningDto(String session, int duration) {
+    this.session = session;
+    this.duration = duration;
+  }
 
-	private String session;
+  private String session;
 
-	private int duration;
+  private int duration;
 }

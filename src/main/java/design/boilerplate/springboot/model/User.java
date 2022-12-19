@@ -24,25 +24,25 @@ import lombok.Setter;
 @Table(name = "USERS")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-	private String name;
+  private String name;
 
-	@Column(unique = true)
-	private String username;
+  @Column(unique = true)
+  private String username;
 
-	@Column(nullable = false)
-	private String password;
+  @Column(nullable = false)
+  private String password;
 
-	@Column(nullable = false)
-	private String email;
+  @Column(nullable = false)
+  private String email;
 
-	@Column(nullable = false)
-	private String cpf;
+  @Column(nullable = false)
+  private String cpf;
 
-	@Enumerated(EnumType.STRING)
-	private UserRole userRole;
+  @Enumerated(EnumType.STRING)
+  private UserRole userRole;
 
 }

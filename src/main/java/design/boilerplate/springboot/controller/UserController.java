@@ -37,7 +37,8 @@ public class UserController {
   public ResponseEntity<RegistrationResponse> registrationRequestV2(
       @Valid @RequestBody UserRegistrationRequest registrationRequest) {
 
-    final RegistrationResponse registrationResponse = userService.registrationV2(registrationRequest);
+    final RegistrationResponse registrationResponse = userService.registrationV2(
+        registrationRequest);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(registrationResponse);
   }

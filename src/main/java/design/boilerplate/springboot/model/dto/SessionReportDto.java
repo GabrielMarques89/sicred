@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SessionReportDto {
 
-	private String topic;
-	private PendingVotingUsers votes;
+  private String topic;
+  private PendingVotingUsers votes;
 
 }

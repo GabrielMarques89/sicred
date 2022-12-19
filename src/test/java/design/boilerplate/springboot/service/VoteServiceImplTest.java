@@ -1,7 +1,5 @@
 package design.boilerplate.springboot.service;
 
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Test;
 import util.BaseSicredTest;
 

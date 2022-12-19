@@ -9,14 +9,15 @@ import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 
 public interface UserService {
 
-	User findByUsername(String username);
+  User findByUsername(String username);
 
-	RegistrationResponse registration(UserRegistrationRequest registrationRequest);
+  RegistrationResponse registration(UserRegistrationRequest registrationRequest);
 
-	AuthenticatedUserDto findAuthenticatedUserByUsername(String username);
+  AuthenticatedUserDto findAuthenticatedUserByUsername(String username);
 
-	Long countUsers();
-	RegistrationResponse registrationV2(UserRegistrationRequest registrationRequest)
-			throws NotImplementedException;
+  Long countUsers();
+
+  RegistrationResponse registrationV2(UserRegistrationRequest registrationRequest)
+      throws NotImplementedException;
 
 }

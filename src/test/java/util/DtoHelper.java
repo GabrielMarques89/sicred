@@ -1,14 +1,12 @@
 package util;
 
 import static util.MockValuesConstants.DEFAULT_CPF;
-import static util.MockValuesConstants.DEFAULT_DURATION;
 import static util.MockValuesConstants.DEFAULT_EMAIL;
 import static util.MockValuesConstants.DEFAULT_NAME;
 import static util.MockValuesConstants.DEFAULT_PASSWORD;
 import static util.MockValuesConstants.DEFAULT_SESSION_ID;
 import static util.MockValuesConstants.DEFAULT_TOPIC_ID;
 import static util.MockValuesConstants.DEFAULT_USERNAME;
-import static util.MockValuesConstants.NOW;
 
 import com.google.gson.Gson;
 import design.boilerplate.springboot.model.dto.CpfResponse;
@@ -23,12 +21,13 @@ public class DtoHelper {
   public static final String DEFAULT_FUNDS = "123";
   public static final String DEFAULT_QUERY_ID = "11bb22cc33dd44ee";
   public static final String DEFAULT_DELAY = "0.3";
+  public static final long DEFAULT_DURATION = 15L;
 
   public static SessionRequest mockSessionRequest() {
     var req = new SessionRequest();
 
     req.setTopic(DEFAULT_TOPIC_ID);
-    req.setBeginDateTime(NOW);
+    req.setDuration(DEFAULT_DURATION);
 
     return req;
   }
@@ -62,12 +61,12 @@ public class DtoHelper {
     var req = new SessionOpenningRequest();
 
     req.setSession(DEFAULT_SESSION_ID);
-    req.setDuration(DEFAULT_DURATION);
+    req.setDuration(MockValuesConstants.DEFAULT_DURATION);
 
     return req;
   }
 
-  public static UserRegistrationRequest generateUserRegistrationRequest(){
+  public static UserRegistrationRequest generateUserRegistrationRequest() {
     var req = new UserRegistrationRequest();
     var cpf = new GeraCpfCnpj().cpf(false);
     req.setUsername(cpf);
@@ -79,7 +78,7 @@ public class DtoHelper {
     return req;
   }
 
-  public static UserRegistrationRequest mockUserRegistrationRequest(){
+  public static UserRegistrationRequest mockUserRegistrationRequest() {
     var req = new UserRegistrationRequest();
     req.setCpf(DEFAULT_CPF);
     req.setUsername(DEFAULT_USERNAME);

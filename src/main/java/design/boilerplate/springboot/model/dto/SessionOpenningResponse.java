@@ -10,15 +10,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SessionOpenningResponse {
 
-	public SessionOpenningResponse(Long session, String topicName, String message) {
-		this.session = session;
-		this.topicName = topicName;
-		this.message = message;
-	}
+  public SessionOpenningResponse(Long session, String topicName, String message) {
+    this.session = session;
+    this.topicName = topicName;
+    this.message = message;
+  }
 
-	private Long session;
+  private Long session;
 
-	private String topicName;
+  private String topicName;
 
-	private String message;
+  private String message;
 }

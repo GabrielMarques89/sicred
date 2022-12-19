@@ -11,7 +11,9 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface VoteMapper {
 
-	VoteMapper INSTANCE = Mappers.getMapper(VoteMapper.class);
-	Vote convertToVote(VoteRequest registrationRequest);
-	Session mapSession(Long id);
+  VoteMapper INSTANCE = Mappers.getMapper(VoteMapper.class);
+
+  Vote convertToVote(VoteRequest registrationRequest);
+
+  Session mapSession(Long id);
 }
