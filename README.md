@@ -1,7 +1,8 @@
-# Spring Boot Boilerplate
- *Spring Boot Boilerplate* is a **starter kit**. This project is a very simple and useful.
+# Sicred - Desafio Técnico 
+ * Autor: Gabriel Marques (https://www.linkedin.com/in/gabriel-marques1989/)
+ * Última atualização do readme: 19/12/2022
  
-## Technologies 
+## Tecnologias
 - Spring Boot (v2.7.4)
 - Spring Data JPA
 - Spring Validation
@@ -10,28 +11,51 @@
 - Mapstruct
 - Lombok
 - Swagger
+- Gatling
+- TestNg
 
-## Run the Application
+## Projeto base (boilerplate)
+  - https://github.com/Genc/spring-boot-boilerplate
 
-First you need to make sure that the database is up. 
-If you're using Docker, you can use ```docker compose up -d``` command.
+## Instruções
 
-Navigate to the root of the project. For building the project using command line, run below command :
+- Antes de mais nada, é necessário subir uma instância de banco de dados com o database "sicred"
+- Configurar o banco de dados
+   - No arquivo de configuração (src/main/resources/application.yml), definir as configurações de banco de dados (postgresql)
+   - Por padrão, o projeto já está configurado para executar automaticamente os scripts de criação de tabelas/sequences/etc
+- Subir a aplicação
+  - Alt + Shift + F10 (Atalho do run no intellij) > SicredApplication
+  - Aplicação está configurada para rodar na porta 8080 (src/main/resources/application.yml)
 
-``` mvn clean install```
+- Testes manuais:
+  - Na pasta src/support/postman estão as collections (e variáveis) para teste dos endpoints
+- Testes unitários:
+   - Alt + Shift + F10 (Atalho do run no intellij) > tests
+- Para os testes de performance:
+   - Necessário que a aplicação esteja rodando na porta 8080
+   - Alt + Shift + F10 (Atalho do run no intellij) > Performance Test
+   - O arquivo para definir as configurações é PerformanceSimulation.java (configurar definições - não está com muita abstração em razão de tempo - foi feito do zero)
 
-Run service in command line. Navigate to *target* directory. 
+### Observações
 
-``` java -jar spring-boot-boilerplate.jar ```
-
-
-
-### Others
-
- - [For Angular]
+- Fila JMS
+  - Não foi implementado fila JMS em razão de tempo (pra isso seria necessário instanciar um servidor JMS e configurar a aplicação para se conectar a ele) 
+  - Tenho proeficiência em JMS, já trabalhei com processamento de notificações de app via fila JMS
+- Qualidade de código
+  - Alguns pontos não puderam ser revistos em razão do prazo, mas muita coisa poderia ser revisada para melhoria de organização
+  - Os testes unitários não estão exaustivos. Fiz alguns testes apenas pra ilustrar e proeficiência
+- Integração
+  - A api de integração "https://user-info.herokuapp.com/users/" não está funcionando. Em razão disso, usei a API "https://api.cpfcnpj.com.br" apenas para ilustrar a integração.
+  - Em razão do tempo, não fiz uma abstração para criar os clients. No arquivo "UserValidationService.java" ele é instanciado dentro do método que faz seu uso. Isso foi uma decisão tomada para permitir a injeção do mock no teste unitário sem a necessidade de criar uma estrutura de injeção de dependência para o feignClient.
+- Testes de Performance
+  - Não tinha proeficiência em testes de performance, mas estudei e implementei um mini-framework para testes de performance em gatling, integrado ao projeto.
+- Versionamento
+  - Fiz alguns versionamentos simples no serviço de cadastros, apenas modificando a classe retornada dos serviços
  
-### License
-
+### Licença
 Apache License 2.0
 
-   [For Angular]: <https://github.com/Genc/angular-boilerplate>
+### Autor
+- Gabriel Marques
+  - Linkedin: https://www.linkedin.com/in/gabriel-marques1989/
+  - Email: marques.gabriel.1989@gmail.com
