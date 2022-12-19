@@ -36,7 +36,22 @@
    - Alt + Shift + F10 (Atalho do run no intellij) > Performance Test
    - O arquivo para definir as configurações é PerformanceSimulation.java (configurar definições - não está com muita abstração em razão de tempo - foi feito do zero)
 
-### Observações
+## Importante
+- Foi implementado um sistema de login, é necessário estar logado (jwt via header de authorization) para criar pautas, sessões ou votar
+
+## Postman
+
+- Para facilitar os testes, foi criado uma collection no postman com os endpoints e payloads (src/postman)
+- Para usar, basta fazer o import pro postman (tanto collections quanto variáveis)
+- Com a primeira carga de dados das variáveis globais, é possível já fazer os testes de cadastro de usuário, login, criação de pautas, sessões, votação e contagem de votação
+* É possível executar o folder "serviços" no runner do postman para fazer o fluxo acima:
+
+- ![alt text](https://i.imgur.com/rIV3jDZ.png)
+* Também é possível repassar as jornadas apenas usando as variáveis globais, conforme abaixo
+
+- ![alt text](https://i.imgur.com/zhTbQL1.png)
+
+### Observações Técnicas
 
 - Fila JMS
   - Não foi implementado fila JMS em razão de tempo (pra isso seria necessário instanciar um servidor JMS e configurar a aplicação para se conectar a ele) 

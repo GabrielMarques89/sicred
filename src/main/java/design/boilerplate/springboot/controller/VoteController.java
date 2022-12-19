@@ -2,6 +2,7 @@ package design.boilerplate.springboot.controller;
 
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
 import design.boilerplate.springboot.model.dto.VoteCountDto;
+import design.boilerplate.springboot.model.dto.VoteCountRequest;
 import design.boilerplate.springboot.model.dto.VoteRequest;
 import design.boilerplate.springboot.service.UserService;
 import design.boilerplate.springboot.service.VoteService;
@@ -37,8 +38,8 @@ public class VoteController {
   }
 
   @GetMapping("/countBySession")
-  public ResponseEntity<VoteCountDto> countBySession(Long sessionId) {
-    var result = voteService.countVotes(sessionId);
+  public ResponseEntity<VoteCountDto> countBySession(@Valid VoteCountRequest request) {
+    var result = voteService.countVotes(request.getSession());
 
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }

@@ -10,8 +10,7 @@ import lombok.Setter;
 public class VoteCountDto {
 
   private Long countBySession;
-  private Long TotalTopicVotes;
-  private Long TotalTopicPendingVotes;
-  private Long TotalYesVoteOnTopic;
-  private Long TotalNoVoteOnTopic;
+  private Long pending;
+  private Long yesVotes;
+  private Long noVotes;
 }
