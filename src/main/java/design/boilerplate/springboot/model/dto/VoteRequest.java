@@ -20,5 +20,7 @@ public class VoteRequest {
 
   @NotNull(message = "{vote_session_not_empty}")
   private Long session;
+
+  @NotNull(message = "{vote_result_not_empty}")
   private VoteResult voteResult;
 }
