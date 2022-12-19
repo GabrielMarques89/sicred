@@ -22,6 +22,7 @@ public class DtoHelper {
   public static final String DEFAULT_QUERY_ID = "11bb22cc33dd44ee";
   public static final String DEFAULT_DELAY = "0.3";
   public static final long DEFAULT_DURATION = 15L;
+  public static final String INVALID_CPF_ERROR = "100";
 
   public static SessionRequest mockSessionRequest() {
     var req = new SessionRequest();
@@ -87,6 +88,14 @@ public class DtoHelper {
     req.setName(DEFAULT_NAME);
 
     return req;
+  }
+
+  public static CpfResponse mockFailCpfResponse() {
+    CpfResponse response = new CpfResponse();
+
+    response.setStatus(CpfResponse.INVALID_STATUS);
+    response.setErroCodigo(INVALID_CPF_ERROR);
+    return response;
   }
 
   public static CpfResponse mockCpfResponse() {

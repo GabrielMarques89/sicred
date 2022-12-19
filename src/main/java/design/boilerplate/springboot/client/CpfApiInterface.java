@@ -11,5 +11,5 @@ public interface CpfApiInterface {
 
   @RequestLine("GET /{cpf}")
   @Headers("Content-Type: application/json")
-  CpfResponse getPosts(@Param("cpf") String cpf);
+  CpfResponse getCpfInfo(@Param("cpf") String cpf);
 }

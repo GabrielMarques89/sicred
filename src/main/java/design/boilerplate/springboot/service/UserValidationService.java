@@ -30,9 +30,7 @@ public class UserValidationService {
 
   private final UserRepository userRepository;
 
-  private final CpfApiInterface cpfApiInterface = Feign.builder().decoder(new GsonDecoder())
-      .target(CpfApiInterface.class,
-          "https://api.cpfcnpj.com.br/5ae973d7a997af13f0aaf2bf60e65803/1/");
+  private final CpfApiInterface cpfApiInterface;
 
   private final ExceptionMessageAccessor exceptionMessageAccessor;
 
@@ -70,18 +68,21 @@ public class UserValidationService {
 
   private void validateCpfIntegration(String cpf) {
     try {
-      var result = cpfApiInterface.getPosts(cpf);
+      initClient();
+      var result = cpfApiInterface.getCpfInfo(cpf);
       if (!result.isValidCpf()) {
         log.warn("Cpf {} is invalid!", cpf);
 
-        final String existsEmail = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
-        throw new RegistrationException(existsEmail);
+        final String invalidCpf = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+        throw new RegistrationException(invalidCpf);
       }
     } catch (FeignException e) {
       log.error("Cpf {} is invalid!", e);
       if (e.responseBody().isPresent() && e.status() == 400) {
         try {
           readErrorResponse(cpf, e);
+        } catch (RegistrationException ex) {
+          throw ex;
         } catch (Exception ex) {
           //Tratamento genérico de exceção - por não ter tempo de analisar a documentação da API
           //e entender os possíveis erros e modelos de dados retornados
@@ -90,8 +91,16 @@ public class UserValidationService {
         }
       }
 
-      final String existsEmail = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
-      throw new RegistrationException(existsEmail);
+      final String invalidCpf = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+      throw new RegistrationException(invalidCpf);
+    }
+  }
+
+  private void initClient() {
+    if(cpfApiInterface == null){
+      Feign.builder().decoder(new GsonDecoder())
+          .target(CpfApiInterface.class,
+              "https://api.cpfcnpj.com.br/5ae973d7a997af13f0aaf2bf60e65803/1/");
     }
   }
 
@@ -100,8 +109,8 @@ public class UserValidationService {
         new String(e.responseBody().get().array(), StandardCharsets.UTF_8),
         CpfResponse.class);
     if (UserValidationService.INVALID_CPF_CODE.equals(errorResult.getErroCodigo())) {
-      final String existsEmail = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
-      throw new RegistrationException(existsEmail);
+      String invalidCpf = exceptionMessageAccessor.getMessage(null, INVALID_CPF, cpf);
+      throw new RegistrationException(invalidCpf);
     }
   }
 
