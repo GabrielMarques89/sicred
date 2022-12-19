@@ -16,8 +16,4 @@ public interface UserService {
   AuthenticatedUserDto findAuthenticatedUserByUsername(String username);
 
   Long countUsers();
-
-  RegistrationResponse registrationV2(UserRegistrationRequest registrationRequest)
-      throws NotImplementedException;
-
 }

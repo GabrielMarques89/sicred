@@ -82,13 +82,6 @@ public class UserServiceImplTest extends BaseSicredTest {
     verify(repository, times(1)).count();
   }
 
-  @Test(expectedExceptions = NotImplementedException.class)
-  public void testRegistrationV2() throws NotImplementedException {
-
-    //TODO: Implementar a regra de serviço e reescrever o teste
-    service.registrationV2(mockUserRegistrationRequest());
-  }
-
   @Test
   public void testRegistration() {
     var req = mockUserRegistrationRequest();

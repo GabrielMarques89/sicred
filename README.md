@@ -35,9 +35,12 @@
    - Necessário que a aplicação esteja rodando na porta 8080
    - Alt + Shift + F10 (Atalho do run no intellij) > Performance Test
    - O arquivo para definir as configurações é PerformanceSimulation.java (configurar definições - não está com muita abstração em razão de tempo - foi feito do zero)
+- Swagger:
+  - Acessível via: http://localhost:8080/swagger-ui/index.html
 
 ## Importante
 - Foi implementado um sistema de login, é necessário estar logado (jwt via header de authorization) para criar pautas, sessões ou votar
+- Venho de uma escola em que se evita comentários nos códigos, por isso evitei documentar usando comentários ou javadocs, mas não tenho problema em fazê-lo.
 
 ## Postman
 
@@ -66,7 +69,7 @@
   - Não tinha proeficiência em testes de performance, mas estudei e implementei um mini-framework para testes de performance em gatling, integrado ao projeto.
 - Versionamento
   - Fiz alguns versionamentos simples no serviço de cadastros, apenas modificando a classe retornada dos serviços
- 
+
 ### Licença
 Apache License 2.0
 

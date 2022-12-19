@@ -41,14 +41,6 @@ public class UserServiceImpl implements UserService {
     return userRepository.count();
   }
 
-  @Override
-  public RegistrationResponse registrationV2(UserRegistrationRequest registrationRequest)
-      throws NotImplementedException {
-    //TODO: Implementar lógica adicional
-    throw new NotImplementedException("Yet to implement");
-  }
-
-
   public RegistrationResponse registration(UserRegistrationRequest registrationRequest) {
 
     userValidationService.validateUser(registrationRequest);

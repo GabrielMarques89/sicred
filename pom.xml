@@ -15,15 +15,14 @@
 
     <name>spring-boot-boilerplate</name>
     <description>
-        Spring Boot Boilerplate is a starter kit. This project includes : Spring Boot(2.7.4), Spring Data JPA, Spring Validation, Spring Security +
-        JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger
+        Projeto de desafio técnico sicred - Autor Gabriel Marques
     </description>
 
     <developers>
         <developer>
-            <name>Faruk Genç</name>
-            <email>omer@farukgenc.com</email>
-            <url>https://farukgenc.com</url>
+            <name>Gabriel Marques</name>
+            <email>marques.gabriel.1989@gmail.com</email>
+            <url>https://www.linkedin.com/in/gabriel-marques1989/</url>
         </developer>
     </developers>
 
