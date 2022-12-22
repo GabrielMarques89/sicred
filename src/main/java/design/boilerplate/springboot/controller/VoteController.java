@@ -44,14 +44,7 @@ public class VoteController {
     voteService.registerVote(req, getLoggedUser());
 
     var result = voteService.countVotes(req.getSession());
-
-    try {
-      voteProducer.send(result);
-      return ResponseEntity.status(HttpStatus.OK)
-          .body(new RegistrationResponse("Voto registrado"));
-    } catch (JsonProcessingException e) {
-      throw new RuntimeException(e);
-    }
+    return ResponseEntity.status(HttpStatus.OK).body(new RegistrationResponse("Voto registrado"));
   }
 
   @GetMapping(V1_PREFIX + COUNT_URL)

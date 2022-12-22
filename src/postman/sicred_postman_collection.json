@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "78c3b520-f3ff-4210-940b-27153d481dc8",
 		"name": "Sicred",
+		"description": "API de apoio para uso dos endpoints do desafio SICRED",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12430323"
 	},
@@ -79,14 +80,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/user",
+							"raw": "http://localhost:8080/user/v1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"user"
+								"user",
+								"v1"
 							]
 						}
 					},
@@ -121,14 +123,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/login",
+							"raw": "http://localhost:8080/login/v1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"login"
+								"login",
+								"v1"
 							]
 						}
 					},
@@ -213,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"topic\": \"{{topicId}}\",\r\n    \"duration\": 15\r\n}",
+							"raw": "{\r\n    \"topic\": \"{{topicId}}\",\r\n    \"duration\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -252,7 +255,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"session\": \"{{sessionId}}\",\r\n    \"voteResult\": \"1\"\r\n}",
+							"raw": "{\r\n    \"session\": {{sessionId}},\r\n    \"voteResult\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,14 +263,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/vote",
+							"raw": "http://localhost:8080/vote/v1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"vote"
+								"vote",
+								"v1"
 							]
 						}
 					},
@@ -300,7 +304,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/vote/countBySession?session={{sessionId}}",
+							"raw": "http://localhost:8080/vote/v1/countBySession?session={{sessionId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -308,6 +312,7 @@
 							"port": "8080",
 							"path": [
 								"vote",
+								"v1",
 								"countBySession"
 							],
 							"query": [
@@ -320,7 +325,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Documentação de apoio - Desafio SICRED (Autor: Gabriel Marques)"
 		}
 	]
 }

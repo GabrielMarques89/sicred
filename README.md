@@ -49,11 +49,13 @@
   - Além disso, esse método faz o envio da votação finalizada para o tópico JMS
   - Poderia ter sido criada uma validação na votação (se a sessão já foi encerrada), mas preferi evitar refactors no fim do projeto.
 - Venho de uma escola em que se evita comentários nos códigos, por isso evitei documentar usando comentários ou javadocs, mas não tenho problema em fazê-lo.
+- Tudo foi feito na MASTER por pura praticidade (visto que é um projeto solo), mas em projetos reais, utilizo o gitflow (inclusive com PR interno (e avaliação de qualidade de código interna) + PR oficial pra branchs de desenvolvimento coletivo).
 
 ## Postman
 
 - Para facilitar os testes, foi criado uma collection no postman com os endpoints e payloads (src/postman)
 - Para usar, basta fazer o import pro postman (tanto collections quanto variáveis)
+- Existem scripts do postman setando as variáveis automáticamente para os próximos requests/reuso.
 - Com a primeira carga de dados das variáveis globais, é possível já fazer os testes de cadastro de usuário, login, criação de pautas, sessões, votação e contagem de votação
 * É possível executar o folder "serviços" no runner do postman para fazer o fluxo acima:
 

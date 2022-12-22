@@ -1,4 +1,4 @@
-package design.boilerplate.springboot.batch;
+package design.boilerplate.springboot.routines;
 
 import design.boilerplate.springboot.service.interfaces.SessionService;
 import lombok.extern.slf4j.Slf4j;
