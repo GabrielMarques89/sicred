@@ -13,11 +13,11 @@ import static io.gatling.javaapi.http.HttpDsl.status;
 import static util.DtoHelper.generateUserRegistrationRequest;
 
 import com.google.gson.Gson;
-import design.boilerplate.springboot.model.VoteResult;
 import design.boilerplate.springboot.model.dto.LoginRequest;
 import design.boilerplate.springboot.model.dto.SessionRequest;
 import design.boilerplate.springboot.model.dto.TopicRequest;
 import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
+import design.boilerplate.springboot.model.enums.VoteResult;
 import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;

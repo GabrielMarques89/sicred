@@ -1,10 +1,10 @@
 package design.boilerplate.springboot.repository;
 
-import design.boilerplate.springboot.model.Session;
-import design.boilerplate.springboot.model.Topic;
-import design.boilerplate.springboot.model.User;
-import design.boilerplate.springboot.model.Vote;
-import design.boilerplate.springboot.model.VoteResult;
+import design.boilerplate.springboot.model.entities.Session;
+import design.boilerplate.springboot.model.entities.Topic;
+import design.boilerplate.springboot.model.entities.User;
+import design.boilerplate.springboot.model.entities.Vote;
+import design.boilerplate.springboot.model.enums.VoteResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

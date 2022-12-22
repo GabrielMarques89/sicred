@@ -1,6 +1,5 @@
 package design.boilerplate.springboot.exceptions;
 
-import design.boilerplate.springboot.controller.UserController;
 import design.boilerplate.springboot.exceptions.response.ApiExceptionResponse;
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;

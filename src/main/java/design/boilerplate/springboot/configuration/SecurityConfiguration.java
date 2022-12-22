@@ -33,21 +33,14 @@ public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-    //@formatter:off
-
     return http.cors().and().csrf().disable()
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         .authorizeRequests()
-        .antMatchers("/user", "/login", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
-            "/actuator/**").permitAll()
+        .antMatchers("/user/**", "/login/**", "/v3/api-docs/**", "/swagger-ui/**",
+            "/swagger-ui.html", "/actuator/**").permitAll()
         .anyRequest().authenticated().and()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and().build();
-
-    //@formatter:on
   }
-
-
 }

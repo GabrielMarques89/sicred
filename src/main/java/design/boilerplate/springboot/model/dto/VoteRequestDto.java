@@ -1,6 +1,6 @@
 package design.boilerplate.springboot.model.dto;
 
-import design.boilerplate.springboot.model.VoteResult;
+import design.boilerplate.springboot.model.enums.VoteResult;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

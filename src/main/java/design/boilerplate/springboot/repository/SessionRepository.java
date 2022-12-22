@@ -1,7 +1,7 @@
 package design.boilerplate.springboot.repository;
 
-import design.boilerplate.springboot.model.Session;
-import design.boilerplate.springboot.model.Topic;
+import design.boilerplate.springboot.model.entities.Session;
+import design.boilerplate.springboot.model.entities.Topic;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Pageable;

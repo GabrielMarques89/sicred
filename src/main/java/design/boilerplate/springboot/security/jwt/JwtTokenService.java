@@ -1,11 +1,11 @@
 package design.boilerplate.springboot.security.jwt;
 
-import design.boilerplate.springboot.model.User;
 import design.boilerplate.springboot.model.dto.AuthenticatedUserDto;
 import design.boilerplate.springboot.model.dto.LoginRequest;
 import design.boilerplate.springboot.model.dto.LoginResponse;
+import design.boilerplate.springboot.model.entities.User;
 import design.boilerplate.springboot.model.mapper.UserMapper;
-import design.boilerplate.springboot.service.UserService;
+import design.boilerplate.springboot.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,8 +34,7 @@ public class JwtTokenService {
 
     authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-    final AuthenticatedUserDto authenticatedUserDto = userService.findAuthenticatedUserByUsername(
-        username);
+    final AuthenticatedUserDto authenticatedUserDto = userService.findByUsername(username);
 
     final User user = UserMapper.INSTANCE.map(authenticatedUserDto);
     final String token = jwtTokenManager.generateToken(user);

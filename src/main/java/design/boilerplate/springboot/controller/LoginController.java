@@ -3,6 +3,7 @@ package design.boilerplate.springboot.controller;
 import design.boilerplate.springboot.model.dto.LoginRequest;
 import design.boilerplate.springboot.model.dto.LoginResponse;
 import design.boilerplate.springboot.security.jwt.JwtTokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,8 @@ public class LoginController {
 
   private final JwtTokenService jwtTokenService;
 
-  @PostMapping
+  @PostMapping("/v1")
+  @Operation(summary = "Makes a login attempt")
   public ResponseEntity<LoginResponse> loginRequest(@Valid @RequestBody LoginRequest loginRequest) {
 
     final LoginResponse loginResponse = jwtTokenService.getLoginResponse(loginRequest);

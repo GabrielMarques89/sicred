@@ -5,6 +5,8 @@ import static org.mockito.Mockito.when;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
 import design.boilerplate.springboot.repository.SessionRepository;
+import design.boilerplate.springboot.service.interfaces.TopicService;
+import design.boilerplate.springboot.service.validations.SessionValidationService;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

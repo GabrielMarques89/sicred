@@ -1,8 +1,8 @@
 package design.boilerplate.springboot.model.mapper;
 
-import design.boilerplate.springboot.model.Session;
-import design.boilerplate.springboot.model.Vote;
 import design.boilerplate.springboot.model.dto.VoteRequest;
+import design.boilerplate.springboot.model.entities.Session;
+import design.boilerplate.springboot.model.entities.Vote;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

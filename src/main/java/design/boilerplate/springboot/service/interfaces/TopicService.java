@@ -1,15 +1,15 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.interfaces;
 
-import design.boilerplate.springboot.model.Topic;
 import design.boilerplate.springboot.model.dto.TopicRequest;
 import design.boilerplate.springboot.model.dto.TopicResponse;
+import design.boilerplate.springboot.model.entities.Topic;
 
 
 public interface TopicService {
 
-  Topic createTopic(TopicRequest topic);
+  TopicResponse createTopic(TopicRequest topic);
 
   TopicResponse createTopicV2(TopicRequest topic);
 
-  Topic getTopic(Long id);
+  TopicResponse getTopic(Long id);
 }

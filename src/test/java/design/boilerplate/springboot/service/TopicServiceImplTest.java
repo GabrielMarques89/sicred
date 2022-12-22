@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import static util.DtoHelper.mockTopicRequest;
 
 import design.boilerplate.springboot.repository.TopicRepository;
+import design.boilerplate.springboot.service.implementations.TopicServiceImpl;
+import design.boilerplate.springboot.service.validations.TopicValidationService;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

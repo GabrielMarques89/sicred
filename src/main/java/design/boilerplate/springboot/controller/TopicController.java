@@ -3,7 +3,8 @@ package design.boilerplate.springboot.controller;
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
 import design.boilerplate.springboot.model.dto.TopicRequest;
 import design.boilerplate.springboot.model.dto.TopicResponse;
-import design.boilerplate.springboot.service.TopicService;
+import design.boilerplate.springboot.service.interfaces.TopicService;
+import io.swagger.v3.oas.annotations.Operation;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,8 @@ public class TopicController {
 
   private final TopicService topicService;
 
-  @PostMapping()
+  @PostMapping("/v1")
+  @Operation(summary = "Registers a new topic")
   public ResponseEntity<RegistrationResponse> createTopic(
       @Valid @RequestBody TopicRequest topicRequest) {
 
@@ -33,6 +35,7 @@ public class TopicController {
   }
 
   @PostMapping("/v2")
+  @Operation(summary = "Registers a new topic - v2 version")
   public ResponseEntity<TopicResponse> createTopicV2(
       @Valid @RequestBody TopicRequest topicRequest) {
 

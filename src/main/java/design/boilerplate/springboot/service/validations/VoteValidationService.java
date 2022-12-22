@@ -1,13 +1,12 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.validations;
 
-import static java.lang.String.format;
 import static java.time.ZoneOffset.UTC;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
-import design.boilerplate.springboot.model.Session;
-import design.boilerplate.springboot.model.Topic;
-import design.boilerplate.springboot.model.User;
-import design.boilerplate.springboot.model.Vote;
+import design.boilerplate.springboot.model.entities.Session;
+import design.boilerplate.springboot.model.entities.Topic;
+import design.boilerplate.springboot.model.entities.User;
+import design.boilerplate.springboot.model.entities.Vote;
 import design.boilerplate.springboot.repository.SessionRepository;
 import design.boilerplate.springboot.repository.VoteRepository;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
@@ -94,7 +93,7 @@ public class VoteValidationService {
 
   private void checkIfUserAlreadyVoted(Topic topic, User user) {
     if (voteRepository.existsByUserAndTopic(user, topic)) {
-      var message = format(VOTE_ALREADY_EXISTS_FOR_TOPIC_AND_USER, topic.getId(),user.getId());
+      var message = String.format(VOTE_ALREADY_EXISTS_FOR_TOPIC_AND_USER, topic.getId(),user.getId());
       log.warn(message);
 
       throw new RegistrationException(

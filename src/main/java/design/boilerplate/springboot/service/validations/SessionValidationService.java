@@ -1,8 +1,9 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.validations;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
-import design.boilerplate.springboot.model.Session;
+import design.boilerplate.springboot.model.entities.Session;
 import design.boilerplate.springboot.repository.SessionRepository;
+import design.boilerplate.springboot.service.interfaces.TopicService;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

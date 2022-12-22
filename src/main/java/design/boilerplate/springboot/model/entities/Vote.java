@@ -1,5 +1,6 @@
-package design.boilerplate.springboot.model;
+package design.boilerplate.springboot.model.entities;
 
+import design.boilerplate.springboot.model.enums.VoteResult;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -5,7 +5,7 @@ import static design.boilerplate.springboot.security.utils.SecurityConstants.LOG
 import static design.boilerplate.springboot.security.utils.SecurityConstants.REGISTRATION_REQUEST_URI;
 import static design.boilerplate.springboot.security.utils.SecurityConstants.TOKEN_PREFIX;
 
-import design.boilerplate.springboot.service.UserDetailsServiceImpl;
+import design.boilerplate.springboot.service.implementations.UserDetailsServiceImpl;
 import java.io.IOException;
 import java.util.Objects;
 import javax.servlet.FilterChain;

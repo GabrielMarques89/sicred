@@ -1,8 +1,7 @@
 package design.boilerplate.springboot.repository;
 
-import design.boilerplate.springboot.model.User;
+import design.boilerplate.springboot.model.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 
 public interface UserRepository extends JpaRepository<User, Long> {
 

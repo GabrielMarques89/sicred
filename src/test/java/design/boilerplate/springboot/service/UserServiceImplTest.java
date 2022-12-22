@@ -12,10 +12,11 @@ import static org.testng.Assert.assertNull;
 import static util.DtoHelper.mockUserRegistrationRequest;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
-import design.boilerplate.springboot.model.User;
+import design.boilerplate.springboot.model.entities.User;
 import design.boilerplate.springboot.repository.UserRepository;
+import design.boilerplate.springboot.service.implementations.UserServiceImpl;
+import design.boilerplate.springboot.service.validations.UserValidationService;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
-import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,9 +49,10 @@ public class UserServiceImplTest extends BaseSicredTest {
     String userName = "UserName";
 
     User mockUser = mockDefaultUser(userName);
+    when(repository.findByUsername(userName)).thenReturn(mockUser);
 
     var result = service.findByUsername(userName);
-    assertEquals(result, mockUser);
+    assertEquals(result.getUsername(), mockUser.getUsername());
     verify(repository, times(1)).findByUsername(userName);
   }
 
@@ -109,7 +111,7 @@ public class UserServiceImplTest extends BaseSicredTest {
 
     mockDefaultUser(username);
 
-    var result = service.findAuthenticatedUserByUsername(username);
+    var result = service.findByUsername(username);
 
     assertEquals(result.getUsername(), username);
     assertNotNull(result.getUserRole());

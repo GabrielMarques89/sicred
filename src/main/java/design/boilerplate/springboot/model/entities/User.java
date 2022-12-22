@@ -1,15 +1,13 @@
-package design.boilerplate.springboot.model;
+package design.boilerplate.springboot.model.entities;
 
-import java.time.LocalDateTime;
+import design.boilerplate.springboot.model.enums.UserRole;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,19 +22,28 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "SESSIONS")
-public class Session {
+@Table(name = "USERS")
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private String name;
+
+  @Column(unique = true)
+  private String username;
+
   @Column(nullable = false)
-  private LocalDateTime beginDateTime;
+  private String password;
 
-  private LocalDateTime endDateTime;
+  @Column(nullable = false)
+  private String email;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "topic_id", nullable = false, foreignKey = @ForeignKey(name = "FK_SESSION_TOPIC"))
-  private Topic topic;
+  @Column(nullable = false)
+  private String cpf;
+
+  @Enumerated(EnumType.STRING)
+  private UserRole userRole;
+
 }

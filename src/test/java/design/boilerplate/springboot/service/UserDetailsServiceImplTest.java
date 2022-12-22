@@ -1,11 +1,15 @@
 package design.boilerplate.springboot.service;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static util.MockValuesConstants.DEFAULT_USERNAME;
 
-import design.boilerplate.springboot.model.UserRole;
+import design.boilerplate.springboot.model.enums.UserRole;
+import design.boilerplate.springboot.model.mapper.UserMapper;
 import design.boilerplate.springboot.repository.UserRepository;
+import design.boilerplate.springboot.service.implementations.UserDetailsServiceImpl;
+import design.boilerplate.springboot.service.implementations.UserServiceImpl;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -39,24 +43,25 @@ public class UserDetailsServiceImplTest extends BaseSicredTest {
 
   @Test(priority = 1)
   public void testLoadUserByUsername() {
-    var mockedUser = ModelHelper.mockUser(DEFAULT_USERNAME);
+    var authUser = UserMapper.INSTANCE.convertToAuthenticatedUserDto(
+        ModelHelper.mockUser(DEFAULT_USERNAME));
 
-    when(userService.findByUsername(DEFAULT_USERNAME)).thenReturn(mockedUser);
-    when(userService.findAuthenticatedUserByUsername(DEFAULT_USERNAME)).thenCallRealMethod();
+    when(userService.findByUsername(any())).thenReturn(authUser);
     var result = service.loadUserByUsername(DEFAULT_USERNAME);
 
+
+
     Assert.assertEquals(result.getUsername(), DEFAULT_USERNAME);
-    Assert.assertEquals(result.getPassword(), mockedUser.getPassword());
     Assert.assertTrue(result.getAuthorities().size() > 0);
     testAuthority(result, UserRole.USER);
   }
 
   @Test(priority = 0)
   public void testLoadAdminUserByUsername() {
-    var mockedUser = ModelHelper.mockAdminUser();
+    var authUser = UserMapper.INSTANCE.convertToAuthenticatedUserDto(
+        ModelHelper.mockAdminUser());
 
-    when(userService.findByUsername(DEFAULT_USERNAME)).thenReturn(mockedUser);
-    when(userService.findAuthenticatedUserByUsername(DEFAULT_USERNAME)).thenCallRealMethod();
+    when(userService.findByUsername(any())).thenReturn(authUser);
     var result = service.loadUserByUsername(DEFAULT_USERNAME);
 
     testAuthority(result, UserRole.ADMIN);

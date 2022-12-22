@@ -10,8 +10,10 @@ import static org.testng.Assert.assertEquals;
 import static util.DtoHelper.mockSessionRequest;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
-import design.boilerplate.springboot.model.Session;
+import design.boilerplate.springboot.model.entities.Session;
 import design.boilerplate.springboot.repository.SessionRepository;
+import design.boilerplate.springboot.service.implementations.SessionServiceImpl;
+import design.boilerplate.springboot.service.validations.SessionValidationService;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
 import java.util.Optional;
 import org.mockito.InjectMocks;

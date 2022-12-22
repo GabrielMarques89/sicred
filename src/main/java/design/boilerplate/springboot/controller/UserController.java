@@ -2,10 +2,10 @@ package design.boilerplate.springboot.controller;
 
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
 import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
-import design.boilerplate.springboot.service.UserService;
+import design.boilerplate.springboot.service.interfaces.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,7 +23,8 @@ public class UserController {
 
   private final UserService userService;
 
-  @PostMapping()
+  @PostMapping("/v1")
+  @Operation(summary = "Registers a new user")
   public ResponseEntity<RegistrationResponse> registrationRequest(
       @Valid @RequestBody UserRegistrationRequest registrationRequest) {
 

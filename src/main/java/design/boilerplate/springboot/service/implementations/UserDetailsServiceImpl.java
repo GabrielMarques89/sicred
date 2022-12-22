@@ -1,7 +1,8 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.implementations;
 
-import design.boilerplate.springboot.model.UserRole;
 import design.boilerplate.springboot.model.dto.AuthenticatedUserDto;
+import design.boilerplate.springboot.model.enums.UserRole;
+import design.boilerplate.springboot.service.interfaces.UserService;
 import java.util.Collections;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) {
 
-    final AuthenticatedUserDto authenticatedUser = userService.findAuthenticatedUserByUsername(
-        username);
+    final AuthenticatedUserDto authenticatedUser = userService.findByUsername(username);
 
     if (Objects.isNull(authenticatedUser)) {
       throw new UsernameNotFoundException(USERNAME_OR_PASSWORD_INVALID);

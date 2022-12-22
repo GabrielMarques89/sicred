@@ -1,6 +1,8 @@
 package design.boilerplate.springboot.service;
 
 import design.boilerplate.springboot.repository.TopicRepository;
+import design.boilerplate.springboot.service.interfaces.TopicService;
+import design.boilerplate.springboot.service.validations.TopicValidationService;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

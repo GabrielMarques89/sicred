@@ -10,10 +10,10 @@ import static util.MockValuesConstants.DEFAULT_USERNAME;
 import static util.MockValuesConstants.DEFAULT_USER_ID;
 import static util.MockValuesConstants.NOW;
 
-import design.boilerplate.springboot.model.Session;
-import design.boilerplate.springboot.model.Topic;
-import design.boilerplate.springboot.model.User;
-import design.boilerplate.springboot.model.UserRole;
+import design.boilerplate.springboot.model.entities.Session;
+import design.boilerplate.springboot.model.entities.Topic;
+import design.boilerplate.springboot.model.entities.User;
+import design.boilerplate.springboot.model.enums.UserRole;
 
 public class ModelHelper {
 

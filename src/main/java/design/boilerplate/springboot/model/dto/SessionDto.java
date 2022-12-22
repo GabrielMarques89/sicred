@@ -20,6 +20,8 @@ public class SessionDto {
     this.beginDateTime = beginDateTime;
   }
 
+  private Long id;
+
   private String topic;
   private String beginDateTime;
 }

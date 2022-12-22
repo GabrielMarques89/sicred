@@ -1,6 +1,6 @@
 package design.boilerplate.springboot.model.dto;
 
-import design.boilerplate.springboot.model.UserRole;
+import design.boilerplate.springboot.model.enums.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

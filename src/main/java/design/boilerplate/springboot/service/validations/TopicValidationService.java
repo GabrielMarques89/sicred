@@ -1,4 +1,4 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.validations;
 
 import design.boilerplate.springboot.exceptions.RegistrationException;
 import design.boilerplate.springboot.model.dto.TopicRequest;

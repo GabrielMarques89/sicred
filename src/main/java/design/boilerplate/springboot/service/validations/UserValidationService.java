@@ -1,4 +1,4 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.validations;
 
 import com.google.gson.Gson;
 import design.boilerplate.springboot.client.CpfApiInterface;

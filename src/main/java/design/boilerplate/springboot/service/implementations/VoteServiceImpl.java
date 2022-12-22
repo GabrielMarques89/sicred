@@ -1,13 +1,18 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.implementations;
 
-import design.boilerplate.springboot.model.Session;
-import design.boilerplate.springboot.model.User;
-import design.boilerplate.springboot.model.VoteResult;
+import design.boilerplate.springboot.model.dto.AuthenticatedUserDto;
 import design.boilerplate.springboot.model.dto.VoteCountDto;
 import design.boilerplate.springboot.model.dto.VoteRequest;
+import design.boilerplate.springboot.model.entities.Session;
+import design.boilerplate.springboot.model.enums.VoteResult;
+import design.boilerplate.springboot.model.mapper.UserMapper;
 import design.boilerplate.springboot.model.mapper.VoteMapper;
 import design.boilerplate.springboot.repository.SessionRepository;
+import design.boilerplate.springboot.repository.UserRepository;
 import design.boilerplate.springboot.repository.VoteRepository;
+import design.boilerplate.springboot.service.interfaces.UserService;
+import design.boilerplate.springboot.service.interfaces.VoteService;
+import design.boilerplate.springboot.service.validations.VoteValidationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,12 +26,14 @@ public class VoteServiceImpl implements VoteService {
   private final VoteRepository voteRepository;
   private final UserService userService;
   private final SessionRepository sessionRepository;
+  private final UserRepository userRepository;
   private final VoteValidationService voteValidationService;
 
   @Override
-  public void registerVote(VoteRequest req, User user) {
+  public void registerVote(VoteRequest req, AuthenticatedUserDto user) {
     var vote = VoteMapper.INSTANCE.convertToVote(req);
-    vote.setUser(user);
+    var modelUser = userRepository.findByUsername(user.getUsername());
+    vote.setUser(modelUser);
     vote = voteValidationService.validateVote(vote);
 
     voteRepository.save(vote);

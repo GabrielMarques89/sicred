@@ -1,9 +1,7 @@
-package design.boilerplate.springboot.model;
+package design.boilerplate.springboot.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,28 +19,13 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "USERS")
-public class User {
+@Table(name = "TOPICS")
+public class Topic {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false)
   private String name;
-
-  @Column(unique = true)
-  private String username;
-
-  @Column(nullable = false)
-  private String password;
-
-  @Column(nullable = false)
-  private String email;
-
-  @Column(nullable = false)
-  private String cpf;
-
-  @Enumerated(EnumType.STRING)
-  private UserRole userRole;
-
 }

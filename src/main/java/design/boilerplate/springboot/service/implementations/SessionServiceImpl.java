@@ -1,10 +1,14 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.implementations;
 
-import design.boilerplate.springboot.model.Session;
 import design.boilerplate.springboot.model.dto.SessionCreationResponse;
+import design.boilerplate.springboot.model.dto.SessionDto;
 import design.boilerplate.springboot.model.dto.SessionRequest;
+import design.boilerplate.springboot.model.entities.Session;
 import design.boilerplate.springboot.model.mapper.SessionMapper;
 import design.boilerplate.springboot.repository.SessionRepository;
+import design.boilerplate.springboot.service.interfaces.SessionService;
+import design.boilerplate.springboot.service.interfaces.VoteService;
+import design.boilerplate.springboot.service.validations.SessionValidationService;
 import design.boilerplate.springboot.utils.ExceptionMessageAccessor;
 import design.boilerplate.springboot.utils.GeneralMessageAccessor;
 import java.time.LocalDateTime;
@@ -28,13 +32,11 @@ public class SessionServiceImpl implements SessionService {
   private final String INVALID_DURATION = "invalid_duration";
 
 
-  public SessionCreationResponse createSessionV2(SessionRequest topic) {
-    var result = createSession(topic);
-
-    return SessionMapper.INSTANCE.map(result);
+  public void createSession(SessionRequest request) {
+    createSessionV2(request);
   }
 
-  public Session createSession(SessionRequest sessionRequest) {
+  public SessionCreationResponse createSessionV2(SessionRequest sessionRequest) {
     log.info("Creating session");
     var session = SessionMapper.INSTANCE.convert(sessionRequest);
     session.setBeginDateTime(LocalDateTime.now());
@@ -48,12 +50,15 @@ public class SessionServiceImpl implements SessionService {
     }
 
     sessionValidationService.validateSession(session);
+    sessionRepository.save(session);
 
-    return sessionRepository.save(session);
+    return SessionMapper.INSTANCE.map(session);
   }
 
-  public Session getSession(Long sessionId) {
-    return sessionRepository.findById(sessionId).orElseThrow(
-        () -> new RuntimeException(exceptionMessageAccessor.getMessage((INVALID_SESSION))));
-  }
+//  public SessionDto getSession(Long sessionId) {
+//    var entity = sessionRepository.findById(sessionId).orElseThrow(
+//        () -> new RuntimeException(exceptionMessageAccessor.getMessage((INVALID_SESSION))));
+//
+//    return SessionMapper.INSTANCE.mapToDto(entity);
+//  }
 }

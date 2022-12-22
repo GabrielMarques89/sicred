@@ -1,15 +1,14 @@
-package design.boilerplate.springboot.service;
+package design.boilerplate.springboot.service.interfaces;
 
 
-import design.boilerplate.springboot.model.Session;
 import design.boilerplate.springboot.model.dto.SessionCreationResponse;
+import design.boilerplate.springboot.model.dto.SessionDto;
 import design.boilerplate.springboot.model.dto.SessionRequest;
+import design.boilerplate.springboot.model.entities.Session;
 
 public interface SessionService {
 
-  Session createSession(SessionRequest topic);
+  void createSession(SessionRequest topic);
 
   SessionCreationResponse createSessionV2(SessionRequest topic);
-
-  Session getSession(Long sessionId);
 }

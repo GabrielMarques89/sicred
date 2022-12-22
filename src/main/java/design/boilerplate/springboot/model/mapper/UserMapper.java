@@ -1,8 +1,8 @@
 package design.boilerplate.springboot.model.mapper;
 
-import design.boilerplate.springboot.model.User;
 import design.boilerplate.springboot.model.dto.AuthenticatedUserDto;
 import design.boilerplate.springboot.model.dto.UserRegistrationRequest;
+import design.boilerplate.springboot.model.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
