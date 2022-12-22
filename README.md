@@ -24,8 +24,8 @@
 - Configurar o banco de dados
    - No arquivo de configuração (src/main/resources/application.yml), definir as configurações de banco de dados (postgresql)
    - Por padrão, o projeto já está configurado para executar automaticamente os scripts de criação de tabelas/sequences/etc
-- Configurar servidor JMS (https://activemq.apache.org/)
-- No application.yml seguem as configurações padrão para o ActiveMQ
+- Configurar servidor JMS (https://activemq.apache.org/) e startá-lo
+- No **application.yml** seguem as configurações padrão para o ActiveMQ
 - Subir a aplicação
   - Alt + Shift + F10 (Atalho do run no intellij) > SicredApplication
   - Aplicação está configurada para rodar na porta 8080 (src/main/resources/application.yml)
