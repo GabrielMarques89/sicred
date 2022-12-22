@@ -1,5 +1,7 @@
 package design.boilerplate.springboot.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import design.boilerplate.springboot.jms.model.service.VoteProducer;
 import design.boilerplate.springboot.model.dto.AuthenticatedUserDto;
 import design.boilerplate.springboot.model.dto.RegistrationResponse;
 import design.boilerplate.springboot.model.dto.VoteCountDto;
@@ -33,14 +35,23 @@ public class VoteController {
   public static final String COUNT_URL = "/countBySession";
   private final VoteService voteService;
   private final UserService userService;
+  private final VoteProducer voteProducer;
 
   @PostMapping(V1_PREFIX)
   @Operation(summary = "Generates the user authentication token to feed logeed calls with authorizations")
-  public ResponseEntity<RegistrationResponse> registerVote(@Valid @NotNull(message = "{vote_session_not_empty}") @RequestBody VoteRequest req) {
+  public ResponseEntity<RegistrationResponse> registerVote(
+      @Valid @NotNull(message = "{vote_session_not_empty}") @RequestBody VoteRequest req) {
     voteService.registerVote(req, getLoggedUser());
 
-    return ResponseEntity.status(HttpStatus.OK)
-        .body(new RegistrationResponse("Voto registrado"));
+    var result = voteService.countVotes(req.getSession());
+
+    try {
+      voteProducer.send(result);
+      return ResponseEntity.status(HttpStatus.OK)
+          .body(new RegistrationResponse("Voto registrado"));
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @GetMapping(V1_PREFIX + COUNT_URL)

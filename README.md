@@ -13,6 +13,7 @@
 - Swagger
 - Gatling
 - TestNg
+- JMS
 
 ## Projeto base (boilerplate)
   - https://github.com/Genc/spring-boot-boilerplate
@@ -23,6 +24,8 @@
 - Configurar o banco de dados
    - No arquivo de configuração (src/main/resources/application.yml), definir as configurações de banco de dados (postgresql)
    - Por padrão, o projeto já está configurado para executar automaticamente os scripts de criação de tabelas/sequences/etc
+- Configurar servidor JMS (https://activemq.apache.org/)
+- No application.yml seguem as configurações padrão para o ActiveMQ
 - Subir a aplicação
   - Alt + Shift + F10 (Atalho do run no intellij) > SicredApplication
   - Aplicação está configurada para rodar na porta 8080 (src/main/resources/application.yml)
@@ -40,6 +43,11 @@
 
 ## Importante
 - Foi implementado um sistema de login, é necessário estar logado (jwt via header de authorization) para criar pautas, sessões ou votar
+- Para a mensageria, foi implementado um consumer simples que apenas registra o log da mensagem recebida
+- Foi criado um método agendado (FinishSession.finishEndedSessions - executado a cada 60 segundos). 
+  - Esse método chama o serviço, que busca as sessões já encerradas e altera sua flag para "ended = true"
+  - Além disso, esse método faz o envio da votação finalizada para o tópico JMS
+  - Poderia ter sido criada uma validação na votação (se a sessão já foi encerrada), mas preferi evitar refactors no fim do projeto.
 - Venho de uma escola em que se evita comentários nos códigos, por isso evitei documentar usando comentários ou javadocs, mas não tenho problema em fazê-lo.
 
 ## Postman
@@ -56,12 +64,9 @@
 
 ### Observações Técnicas
 
-- Fila JMS
-  - Não foi implementado fila JMS em razão de tempo (pra isso seria necessário instanciar um servidor JMS e configurar a aplicação para se conectar a ele) 
-  - Tenho proeficiência em JMS, já trabalhei com processamento de notificações de app via fila JMS
 - Qualidade de código
   - Alguns pontos não puderam ser revistos em razão do prazo, mas muita coisa poderia ser revisada para melhoria de organização
-  - Os testes unitários não estão exaustivos. Fiz alguns testes apenas pra ilustrar e proeficiência
+  - Os testes unitários não estão exaustivos. Fiz alguns testes apenas pra ilustrar proeficiência
 - Integração
   - A api de integração "https://user-info.herokuapp.com/users/" não está funcionando. Em razão disso, usei a API "https://api.cpfcnpj.com.br" apenas para ilustrar a integração.
   - Em razão do tempo, não fiz uma abstração para criar os clients. No arquivo "UserValidationService.java" ele é instanciado dentro do método que faz seu uso. Isso foi uma decisão tomada para permitir a injeção do mock no teste unitário sem a necessidade de criar uma estrutura de injeção de dependência para o feignClient.

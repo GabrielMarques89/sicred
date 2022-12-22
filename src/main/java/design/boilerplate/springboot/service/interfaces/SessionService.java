@@ -11,4 +11,6 @@ public interface SessionService {
   void createSession(SessionRequest topic);
 
   SessionCreationResponse createSessionV2(SessionRequest topic);
+
+  void endSessions();
 }

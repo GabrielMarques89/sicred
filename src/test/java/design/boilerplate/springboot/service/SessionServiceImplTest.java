@@ -54,24 +54,6 @@ public class SessionServiceImplTest extends BaseSicredTest {
     verify(sessionRepository, times(0)).save(any());
   }
 
-  @Test()
-  public void testGetSessionSuccess() {
-    Session session = mockValidSession();
-
-    var result = service.getSession(1L);
-
-    assertEquals(session, result);
-    verify(sessionRepository, times(1)).findById(any());
-  }
-
-  @Test(expectedExceptions = RuntimeException.class)
-  public void testGetSessionFail() {
-    mockFindSessionOnRepo(null);
-
-    service.getSession(1L);
-    verify(sessionRepository, times(1)).findById(any());
-  }
-
   private void mockFindSessionOnRepo(Session model) {
     when(sessionRepository.findById(any())).thenReturn(Optional.ofNullable(model));
   }

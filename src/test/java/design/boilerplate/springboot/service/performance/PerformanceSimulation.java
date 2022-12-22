@@ -42,13 +42,14 @@ public class PerformanceSimulation extends Simulation {
   public static final String ACCEPT_HEADER = "*/*";
   public static final String CONTENT_TYPE = "application/json";
   public static final String AGENT_HEADER = "PostmanRuntime/7.30.0";
-  public static final String USER_CREATION_URL = "/user";
+  public static final String USER_CREATION_URL = "/user/v1";
   public static final int HTTTP_CREATED = 201;
   public static final int HTTP_OK = 200;
   private static final Random random = new Random();
-  public static final String LOGIN_URL = "/login";
+  public static final String LOGIN_URL = "/login/v1";
   public static final String CREATE_TOPIC_URL = "/topic/v2";
   public static final String CREATE_SESSION_URL = "/session/v2";
+  public static final long DEFAULT_SESSION_DURATION = 2L;
   private Long sessionId;
   private Queue<UserRegistrationRequest> feederUsers;
   private final GeraCpfCnpj cpfGenerator = new GeraCpfCnpj();
@@ -111,14 +112,15 @@ public class PerformanceSimulation extends Simulation {
     return
         exec(session -> {
           var topic = session.getString("topicId");
-          var sessionRequest = gson.toJson(new SessionRequest(Long.parseLong(topic), 15L));
+          var sessionRequest = gson.toJson(new SessionRequest(Long.parseLong(topic),
+              DEFAULT_SESSION_DURATION));
           return session.set("sessionRequest", sessionRequest);
         })
-        .exec(http("create_session").post(CREATE_SESSION_URL)
-            .header("Authorization", "Bearer #{token}")
-            .body(StringBody(session -> session.get("sessionRequest")))
-            .asJson()
-            .check(status().is(HTTTP_CREATED)).check(jsonPath("$.id").saveAs("sessionId")));
+            .exec(http("create_session").post(CREATE_SESSION_URL)
+                .header("Authorization", "Bearer #{token}")
+                .body(StringBody(session -> session.get("sessionRequest")))
+                .asJson()
+                .check(status().is(HTTTP_CREATED)).check(jsonPath("$.id").saveAs("sessionId")));
   }
 
   final Iterator<Map<String, Object>> userFeed = Stream.generate(

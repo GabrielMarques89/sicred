@@ -4,6 +4,14 @@ spring:
     username: postgres
     password: goku1515
 
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    packages:
+      trust-all: true
+    queue: sicred
+
   jpa:
     open-in-view: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect

@@ -36,6 +36,9 @@ public class Session {
 
   private LocalDateTime endDateTime;
 
+  @Column(nullable = false)
+  private boolean ended;
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "topic_id", nullable = false, foreignKey = @ForeignKey(name = "FK_SESSION_TOPIC"))
   private Topic topic;

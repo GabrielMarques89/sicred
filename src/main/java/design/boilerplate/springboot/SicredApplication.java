@@ -7,17 +7,18 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jms.annotation.EnableJms;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableAspectJAutoProxy
 @EnableFeignClients
+@EnableJms
 public class SicredApplication {
 
   public static void main(String[] args) {
-
-    SpringApplication.run(SicredApplication.class, args);
+    var context = SpringApplication.run(SicredApplication.class, args);
   }
 
   @Bean

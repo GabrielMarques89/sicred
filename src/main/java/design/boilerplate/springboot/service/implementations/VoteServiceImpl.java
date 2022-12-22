@@ -8,6 +8,7 @@ import design.boilerplate.springboot.model.enums.VoteResult;
 import design.boilerplate.springboot.model.mapper.UserMapper;
 import design.boilerplate.springboot.model.mapper.VoteMapper;
 import design.boilerplate.springboot.repository.SessionRepository;
+import design.boilerplate.springboot.repository.TopicRepository;
 import design.boilerplate.springboot.repository.UserRepository;
 import design.boilerplate.springboot.repository.VoteRepository;
 import design.boilerplate.springboot.service.interfaces.UserService;
@@ -26,6 +27,7 @@ public class VoteServiceImpl implements VoteService {
   private final VoteRepository voteRepository;
   private final UserService userService;
   private final SessionRepository sessionRepository;
+  private final TopicRepository topicRepository;
   private final UserRepository userRepository;
   private final VoteValidationService voteValidationService;
 
@@ -57,8 +59,8 @@ public class VoteServiceImpl implements VoteService {
     votes.setNoVotes(totalVotes - votes.getYesVotes());
     votes.setCountBySession(totalVotes);
     votes.setPending(userService.countUsers() - totalVotes);
+    votes.setTopic(topicRepository.findById(session.getTopic().getId()).orElseThrow().getName());
 
-    votes.setCountBySession(voteRepository.countBySession(session));
     return votes;
   }
 }
