@@ -11,4 +11,6 @@ public interface UserService {
 
   RegistrationResponse registration(UserRegistrationRequest registrationRequest);
   Long countUsers();
+
+  void createAdmin();
 }

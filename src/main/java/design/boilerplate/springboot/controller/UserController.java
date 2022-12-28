@@ -27,9 +27,6 @@ public class UserController {
   @Operation(summary = "Registers a new user")
   public ResponseEntity<RegistrationResponse> registrationRequest(
       @Valid @RequestBody UserRegistrationRequest registrationRequest) {
-
-    final RegistrationResponse registrationResponse = userService.registration(registrationRequest);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(registrationResponse);
+    return ResponseEntity.status(HttpStatus.CREATED).body(userService.registration(registrationRequest));
   }
 }

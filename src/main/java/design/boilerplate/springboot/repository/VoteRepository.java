@@ -10,11 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
-  boolean existsByUserAndTopic(User user, Topic topic);
-
-  Long countByTopic(Topic topic);
+  boolean existsByUserAndSession(User user, Session session);
 
   Long countBySession(Session topic);
 
-  Long countByTopicAndVoteResult(Topic topic, VoteResult voteResult);
+  Long countBySessionAndVoteResult(Session session, VoteResult voteResult);
 }

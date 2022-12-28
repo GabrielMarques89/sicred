@@ -25,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "SESSIONS")
-public class Session {
+public class Session extends BaseEntity{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

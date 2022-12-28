@@ -55,7 +55,7 @@ public class VoteServiceImpl implements VoteService {
     var votes = new VoteCountDto();
 
     var totalVotes = voteRepository.countBySession(session);
-    votes.setYesVotes(voteRepository.countByTopicAndVoteResult(session.getTopic(), VoteResult.YES));
+    votes.setYesVotes(voteRepository.countBySessionAndVoteResult(session, VoteResult.YES));
     votes.setNoVotes(totalVotes - votes.getYesVotes());
     votes.setCountBySession(totalVotes);
     votes.setPending(userService.countUsers() - totalVotes);

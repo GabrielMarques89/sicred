@@ -57,4 +57,17 @@ public class UserServiceImpl implements UserService {
 
     return new RegistrationResponse(registrationSuccessMessage);
   }
+
+  public void createAdmin(){
+    if(userRepository.findByUsername("admin") == null){
+      var user = new User();
+      user.setUsername("admin");
+      user.setPassword("admin");
+      user.setName("admin");
+      user.setCpf("05241733701");
+      user.setEmail("admin@admin.com");
+      user.setUserRole(UserRole.ADMIN);
+      userRepository.save(user);
+    }
+  }
 }

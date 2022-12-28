@@ -35,8 +35,7 @@ public class VoteValidationService {
 
   public Vote validateVote(Vote vote) {
     var session = validateSession(vote.getSession().getId());
-    vote.setTopic(session.getTopic());
-    checkIfUserAlreadyVoted(session.getTopic(), vote.getUser());
+    checkIfUserAlreadyVoted(session, vote.getUser());
     return vote;
   }
 
@@ -91,9 +90,9 @@ public class VoteValidationService {
   }
 
 
-  private void checkIfUserAlreadyVoted(Topic topic, User user) {
-    if (voteRepository.existsByUserAndTopic(user, topic)) {
-      var message = String.format(VOTE_ALREADY_EXISTS_FOR_TOPIC_AND_USER, topic.getId(),user.getId());
+  private void checkIfUserAlreadyVoted(Session session, User user) {
+    if (voteRepository.existsByUserAndSession(user, session)) {
+      var message = String.format(VOTE_ALREADY_EXISTS_FOR_TOPIC_AND_USER, session.getId(),user.getId());
       log.warn(message);
 
       throw new RegistrationException(

@@ -3,6 +3,7 @@ package design.boilerplate.springboot.model.entities;
 import design.boilerplate.springboot.model.enums.VoteResult;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,25 +25,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "VOTES", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"topic_id", "user_id"})})
-public class Vote {
+    @UniqueConstraint(name = "uk_session_x_user",columnNames = {"session_id", "user_id"})})
+public class Vote extends BaseEntity{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @OneToOne
-  @JoinColumn(name = "user_id", nullable = false)
+  @JoinColumn(name = "user_id", nullable = false, foreignKey=@ForeignKey(name="fk_user"))
   private User user;
 
   @OneToOne
-  @JoinColumn(name = "session_id", nullable = false)
+  @JoinColumn(name = "session_id", nullable = false, foreignKey=@ForeignKey(name="fk_session"))
   private Session session;
-
-
-  @ManyToOne
-  @JoinColumn(name = "topic_id", nullable = false)
-  private Topic topic;
 
   @Column(nullable = false)
   private VoteResult voteResult;
